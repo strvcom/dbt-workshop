@@ -1,0 +1,5 @@
+# Igonre generated files for the handbook
+_build
+
+# MacOS related files
+*.DS_Store
