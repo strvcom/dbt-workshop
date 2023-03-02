@@ -1,9 +1,17 @@
 # Exercise
 
-1. **Create base models:** create base models for each source table (total 4 base models). Make sure all `id` columns are renamed according to the entity they represent e.g. for customer table set `id as customer_id`.
-2. **Create staging models:** create staging models for each base table (total 4 staging models). 
+1. **Create base models:** create base models for each source table (total 4 base models). Make sure all `id` columns are renamed according to the entity they represent e.g. for customer table set `id as customer_id`. *(tip: sample SQL for `base_jaffle_shop_customers` is already included as [the example](../03/base_models.md) in the lecture)*
+2. **Create staging models:** 
+    * firstly create staging models for each base table (total 4 staging models). In `stg_jaffle_shop_payments` filter only payments where amount is bigger than 0. *(tip: sample SQL for `stg_jaffle_shop_customers` is already included as [the example](../03/staging_models.md) in the lecture)*
+    * then create one additional `stg_jaffle_shop_orders_value` model which will be selecting from already created `stg_jaffle_shop_payments` model in the previous step. This model should contain columns: `order_id`, `total_amount` and `coupon_amount` (tip: use case when payment_method ...)
 
-2. **Fill `_stg_[sourcename].yml` files:** finish [the provided example](../03/documentation_tests.html#summary)   for `_stg_jaffle_shop.yml` file and fill `_stg_google_analytics.yml`. 
+3. **Fill `_stg_[sourcename].yml` files:** finish [the provided example](../03/documentation_tests.html#summary)   for `_stg_jaffle_shop.yml` file and fill `_stg_google_analytics.yml`. 
+
+Once it is all set, don't forget to run your models by `dbt run` command and test your models by `dbt test` in your terminal
+
+ ![title](../../images/gifs/dbt_run_staging.gif)
+
+ ![title](../../images/gifs/dbt_test.gif)
 
 ## Solution
 
@@ -189,6 +197,20 @@ select * from filtered
 ```
 :::
 
+:::{admonition} `stg_google_analytics_traffic.sql`
+:class: dropdown
+
+```
+with traffic as (
+
+  select * from {{ ref('base_google_analytics_traffic') }}
+
+)
+
+select * from traffic
+
+```
+:::
 
 **3. Docs & Tests**
 

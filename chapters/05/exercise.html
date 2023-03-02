@@ -505,8 +505,13 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task">
-   Task
+  <a class="reference internal nav-link" href="#prerequisite">
+   Prerequisite
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Exercise
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -534,8 +539,13 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task">
-   Task
+  <a class="reference internal nav-link" href="#prerequisite">
+   Prerequisite
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Exercise
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -555,26 +565,72 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="exercise">
 <h1>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h1>
-<p>To proceed with this exercise we firstly need to have some new or updated records in our database. We have prepared <code class="docutils literal notranslate"><span class="pre">update.sql</span></code> file with batch of fresh data which we now import into our current DB. To do that follow next steps:</p>
+<section id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this headline">#</a></h2>
+<p>To proceed with this exercise we first need to have some new or updated records in our database. We have prepared the <code class="docutils literal notranslate"><span class="pre">update.sql</span></code> file with a batch of fresh data which we now import into our current DB. To do that follow the next steps:</p>
 <ol>
-<li><p>open terminal and navigate to the <code class="docutils literal notranslate"><span class="pre">dbt-workshop/db</span></code> folder</p></li>
+<li><p>open the terminal and navigate to the <code class="docutils literal notranslate"><span class="pre">dbt-workshop/db</span></code> folder</p></li>
 <li><p>copy the <code class="docutils literal notranslate"><span class="pre">update.sql</span></code> file into the container using the following command:</p>
-<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">cp</span> <span class="pre">update.sql</span> <span class="pre">dbt-demo-workshop-database-1:/update.sql</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">cp</span> <span class="pre">update.sql</span> <span class="pre">dbt-demo-workshop-database-1:/update.sql</span></code> (WIP)</p>
 </li>
 <li><p>connect to the Postgres container:</p>
-<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span> <span class="pre">-it</span>&#160; <span class="pre">dbt-demo-workshop-database-1</span> <span class="pre">psql</span> <span class="pre">-U</span> <span class="pre">postgres</span> <span class="pre">datawarehouse</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span> <span class="pre">-it</span>&#160; <span class="pre">dbt-demo-workshop-database-1</span> <span class="pre">psql</span> <span class="pre">-U</span> <span class="pre">postgres</span> <span class="pre">datawarehouse</span></code>  (WIP)</p>
 </li>
 <li><p>run the .sql file inside postgres container:</p>
 <p><code class="docutils literal notranslate"><span class="pre">\i</span> <span class="pre">update.sql</span></code></p>
 </li>
 </ol>
 <p>Now we should have some fresh and updated records in our DB.</p>
-<section id="task">
-<h2>Task<a class="headerlink" href="#task" title="Permalink to this headline">#</a></h2>
-<p>TODO</p>
+</section>
+<section id="id1">
+<h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p><strong>create <code class="docutils literal notranslate"><span class="pre">dim_customers_snapshot</span></code></strong>: create <code class="docutils literal notranslate"><span class="pre">dim_customers_snapshot.sql</span></code> model in <code class="docutils literal notranslate"><span class="pre">snapshots</span></code> folder according to <a class="reference external" href="../05/historization.html#creating-snapshots">the provided example</a>. Check <code class="docutils literal notranslate"><span class="pre">all</span></code> columns for the change.</p></li>
+<li><p><strong>create <code class="docutils literal notranslate"><span class="pre">fact_orders_snapshot</span></code></strong>: create <code class="docutils literal notranslate"><span class="pre">fact_orders_snapshot.sql</span></code> model. Check only <code class="docutils literal notranslate"><span class="pre">status</span></code> column for the change.</p></li>
+<li><p>run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> to load new and updated records into our models</p></li>
+<li><p>run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">snapshot</span></code> to create snapshots</p></li>
+</ol>
 </section>
 <section id="solution">
 <h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">dim_customers_snapshot.sql</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">snapshot</span> <span class="n">dim_customers_snapshot</span> <span class="o">%</span><span class="p">}</span>
+
+    <span class="p">{{</span>
+        <span class="n">config</span><span class="p">(</span>
+          <span class="n">unique_key</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span>
+          <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;check&#39;</span><span class="p">,</span>
+          <span class="n">target_schema</span><span class="o">=</span><span class="s1">&#39;snapshots&#39;</span><span class="p">,</span>
+          <span class="n">check_cols</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">}}</span>
+
+    <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;dim_customers&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">endsnapshot</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">fact_orders_snapshot.sql</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">snapshot</span> <span class="n">fact_orders_snapshots</span> <span class="o">%</span><span class="p">}</span>
+
+    <span class="p">{{</span>
+        <span class="n">config</span><span class="p">(</span>
+          <span class="n">unique_key</span><span class="o">=</span><span class="s1">&#39;order_id&#39;</span><span class="p">,</span>
+          <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;check&#39;</span><span class="p">,</span>
+          <span class="n">target_schema</span><span class="o">=</span><span class="s1">&#39;snapshots&#39;</span><span class="p">,</span>
+          <span class="n">check_cols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">],</span>
+        <span class="p">)</span>
+    <span class="p">}}</span>
+
+  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;fact_orders&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">endsnapshot</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </section>
 </section>
 

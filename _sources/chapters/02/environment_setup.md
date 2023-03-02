@@ -1,6 +1,6 @@
 # Environment setup
 
-1. clone dbt demo project -> https://github.com/srpwnd/dbt-demo
+1. clone dbt demo project -> https://github.com/srpwnd/dbt-demo (TODO)
     * this demo project contains:
         * dbt
         * postgres database

@@ -555,7 +555,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="creating-historized-table-model-name-snapshot-sql">
 <h1>Creating historized table - <code class="docutils literal notranslate"><span class="pre">[model_name]_snapshot.sql</span></code><a class="headerlink" href="#creating-historized-table-model-name-snapshot-sql" title="Permalink to this headline">#</a></h1>
-<p>In our example we will use dbt snapshot functionality to create Slowly Changing Dimensions (SCD).</p>
+<p>In our example, we will use dbt snapshot functionality to create Slowly Changing Dimensions (SCD).</p>
 <div class="admonition-type-2-slowly-changing-dimensions admonition">
 <p class="admonition-title">type-2 Slowly Changing Dimensions</p>
 <p>A Slowly Changing Dimension is a dimension table that includes historical data, allowing you to track changes to dimension data over time. Type 2 SCDs <strong>add a new row to the dimension table whenever a change occurs</strong>. This new row contains the updated data while <strong>the old row is marked as inactive</strong>. This allows you to keep a historical record of changes to the dimension data over time.</p>
@@ -620,18 +620,16 @@ title="Print to PDF"
 </section>
 <section id="creating-snapshots">
 <h2>Creating snapshots<a class="headerlink" href="#creating-snapshots" title="Permalink to this headline">#</a></h2>
-<ol class="simple">
+<ol>
 <li><p>Create a <code class="docutils literal notranslate"><span class="pre">[model_name]_snapshot.sql</span></code> file inside <code class="docutils literal notranslate"><span class="pre">snapshots</span></code> folder.</p></li>
-<li><p>Use a snapshot block, set config properties and insert the query, e.g.</p></li>
-</ol>
+<li><p>Use a snapshot block:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">snapshot</span> <span class="n">orders_snapshot</span> <span class="o">%</span><span class="p">}</span>
 
 <span class="p">{</span><span class="o">%</span> <span class="n">endsnapshot</span> <span class="o">%</span><span class="p">}</span>
 </pre></div>
 </div>
-<ol class="simple">
-<li><p>insert select statement which defined what you want to snapshot. Don’t forget to use <code class="docutils literal notranslate"><span class="pre">source</span></code> or <code class="docutils literal notranslate"><span class="pre">ref</span></code> function here.</p></li>
-</ol>
+</li>
+<li><p>Insert select statement which defined what you want to snapshot. Don’t forget to use <code class="docutils literal notranslate"><span class="pre">source</span></code> or <code class="docutils literal notranslate"><span class="pre">ref</span></code> function here.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">snapshot</span> <span class="n">orders_snapshot</span> <span class="o">%</span><span class="p">}</span>
 
 <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;jaffle_shop&#39;</span><span class="p">,</span> <span class="s1">&#39;orders&#39;</span><span class="p">)</span> <span class="p">}}</span>
@@ -639,9 +637,8 @@ title="Print to PDF"
 <span class="p">{</span><span class="o">%</span> <span class="n">endsnapshot</span> <span class="o">%</span><span class="p">}</span>
 </pre></div>
 </div>
-<ol class="simple">
-<li><p>add snapshot configuration using config block</p></li>
-</ol>
+</li>
+<li><p>Add snapshot configuration using config block:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">snapshot</span> <span class="n">orders_snapshot</span> <span class="o">%</span><span class="p">}</span>
 
     <span class="p">{{</span>
@@ -660,12 +657,16 @@ title="Print to PDF"
 </div>
 <p><strong>Config block:</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">target_schema</span></code>: where to store snapshot tables</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_schema</span> <span class="pre">(required)</span></code>: where to store snapshot tables</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">unique_key</span> <span class="pre">(required)</span></code>: primary key column</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">strategy</span></code>: either <em>check</em> or <em>timestamp</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">strategy</span> <span class="pre">(required)</span></code>: either <em>check</em> or <em>timestamp</em></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">check_cols</span></code>: array of columns to check for changes or <em>‘all’</em> to check all columns</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">updated_at</span></code>: If using the <em>timestamp</em> strategy, the timestamp column to compare</p></li>
 </ul>
+</li>
+<li><p>Run command <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">snapshot</span></code> in the terminal to create snapshots</p></li>
+</ol>
+<p><img alt="title" src="../../_images/dbt_snapshot.gif" /></p>
 </section>
 </section>
 

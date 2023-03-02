@@ -611,14 +611,14 @@ title="Print to PDF"
 <h1>Introduction to dbt<a class="headerlink" href="#introduction-to-dbt" title="Permalink to this headline">#</a></h1>
 <section id="what-is-dbt">
 <h2>What is dbt?<a class="headerlink" href="#what-is-dbt" title="Permalink to this headline">#</a></h2>
-<p>dbt is the T/transformation in ELT data pipelines. It runs on top of database/data warehouse and creates DAGs for data transformations. It is <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">combination</span> <span class="pre">of</span> <span class="pre">SQL</span> <span class="pre">and</span> <span class="pre">Jinja</span></code>, which is compiled into database specific SQL that is run sequentially. Definitions happen in <code class="docutils literal notranslate"><span class="pre">YAML</span> <span class="pre">files</span></code> which also serve as source for documentation. Additinally dbt gives you testing capabilities so you can see which models = tables are causing trouble.</p>
+<p>dbt is the T/transformation in ELT data pipelines. It runs on top of the database/data warehouse and creates DAGs for data transformations. It is <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">combination</span> <span class="pre">of</span> <span class="pre">SQL</span> <span class="pre">and</span> <span class="pre">Jinja</span></code>, which is compiled into database-specific SQL that is run sequentially. Definitions happen in <code class="docutils literal notranslate"><span class="pre">YAML</span> <span class="pre">files</span></code> which also serve as a source for documentation. Additionally, dbt gives you testing capabilities so you can see which models = tables are causing trouble.</p>
 <section id="fun-fact">
 <h3>Fun fact<a class="headerlink" href="#fun-fact" title="Permalink to this headline">#</a></h3>
 <p>dbt community has clear consent that dbt should be written in lowercase. Please obey this agreement!</p>
 </section>
 <section id="how-does-dbt-work">
 <h3>How does dbt work?<a class="headerlink" href="#how-does-dbt-work" title="Permalink to this headline">#</a></h3>
-<p>dbt parses every file in folder transform. In SQL files, it looks for jinja function source/ref to create dependencies. It then creates DAG how all tables are connected between each other and starts by compiling these into pure SQL files. Compiled files can be found in target/compiled folder or whatever is set in <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> file. Then it runs each model/table from the beginning to the end of the DAG.</p>
+<p>dbt parses every file in folder transform. In SQL files, it looks for the jinja function source/ref to create dependencies. It then creates DAG how all tables are connected and starts by compiling these into pure SQL files. Compiled files can be found in the target/compiled folder or whatever is set in the <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> file. Then it runs each model/table from the beginning to the end of the DAG.</p>
 </section>
 </section>
 <section id="main-files">
@@ -631,7 +631,7 @@ title="Print to PDF"
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code></p></td>
-<td><p>Main file for project configuation. Project name is defined here, folder paths for specific functions and models from transform folder are defined here as well. Additionaly hookups that can e.g. grant permissions on schemas are set up here.</p></td>
+<td><p>The main file for project configuration. The project name is defined here, and folder paths for specific functions and models from the transform folder are defined here as well. Additionally, hookups that can e.g. grant permissions on schemas are set up here.</p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">profiles.yml</span></code></p></td>
 <td><p>Connection to the database is set up here including <strong>schema</strong>.</p></td>
@@ -655,25 +655,25 @@ title="Print to PDF"
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code></p></td>
-<td><p>Initatites compilation and run of model DAGs</p></td>
+<td><p>Initiate compilation and run of model DAGs</p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">test</span></code></p></td>
-<td><p>Initiaties testing on current models. Needs to run on existing tables/views so need to be run after at least one <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code>.</p></td>
+<td><p>Initiate testing on current models. Needs to run on existing tables/views so need to be run after at least one <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">compile</span></code></p></td>
-<td><p>Runs compilations only. Good for testing before changing anything. Compiled sql can be run against db in DataGrip.</p></td>
+<td><p>Runs compilations only. Good for testing before changing anything. Compiled SQL can be run against DB.</p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">docs</span> <span class="pre">generate</span></code></p></td>
-<td><p>Generates documentation from <code class="docutils literal notranslate"><span class="pre">schema.yml</span></code> files and on top of database. Includes useful info such as no of rows.</p></td>
+<td><p>Generates documentation from <code class="docutils literal notranslate"><span class="pre">schema.yml</span></code> files and on top of a database. Includes useful info such as number of rows.</p></td>
 </tr>
 <tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">docs</span> <span class="pre">serve</span></code></p></td>
 <td><p>Starts webserver to provide documentation on localhost.</p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">seed</span></code></p></td>
-<td><p>Takes csv files from folder seed and uploads it into database. Schema were it ends up can be changed in <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code></p></td>
+<td><p>Takes .csv files from folder <code class="docutils literal notranslate"><span class="pre">seeds</span></code> and uploads it into a database. The schema where it ends up can be changed in <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">build</span></code></p></td>
-<td><p>New command to do <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> and <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">test</span></code> sequentially.</p></td>
+<td><p>A new command to do <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> and <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">test</span></code> sequentially.</p></td>
 </tr>
 </tbody>
 </table>
@@ -688,10 +688,10 @@ title="Print to PDF"
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">ref('')</span> <span class="pre">}}</span></code></p></td>
-<td><p>Jinja function to reference previous models. It doesn’t need path inside, filename is enough.</p></td>
+<td><p>A jinja function to reference previous models. It doesn’t need path inside, filename is enough.</p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">source('','')</span> <span class="pre">}}</span></code></p></td>
-<td><p>Jinja function to reference source tables defined in <code class="docutils literal notranslate"><span class="pre">sources.yml</span></code>.</p></td>
+<td><p>A jinja function to reference source tables defined in <code class="docutils literal notranslate"><span class="pre">sources.yml</span></code>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -716,11 +716,11 @@ title="Print to PDF"
 </tr>
 <tr class="row-even"><td class="text-align:left"><p>materialization</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">ephemeral</span></code></p></td>
-<td><p>This creates the model in temporary table in the session. These are used as middle step models to fill dependent tables that does not necessarily need to be materialized for other usecases.</p></td>
+<td><p>This creates the model in a temporary table in the session. These are used as middle-step models to fill dependent tables that do not necessarily need to be materialized for other use cases.</p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:left"><p>materialization</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">incremental</span></code></p></td>
-<td><p>Most difficult to set up but can help optimizing compute. This creates temp table on incremental part of source. Defined via jinja statement <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">if</span> <span class="pre">is_incremental()</span> <span class="pre">%}</span> <span class="pre">where</span> <span class="pre">event_time</span> <span class="pre">&gt;</span> <span class="pre">(select</span> <span class="pre">max(event_time)</span> <span class="pre">from</span> <span class="pre">{{</span> <span class="pre">this</span> <span class="pre">}})</span> <span class="pre">{%</span> <span class="pre">endif</span> <span class="pre">%}</span></code>. Then it runs <code class="docutils literal notranslate"><span class="pre">MERGE</span> <span class="pre">INTO</span></code> sql statements that inserts/updates rows in the table.</p></td>
+<td><p>Most difficult to set up but can help optimizing compute. This creates temporary table on the incremental part of source. Defined via jinja statement <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">if</span> <span class="pre">is_incremental()</span> <span class="pre">%}</span> <span class="pre">where</span> <span class="pre">event_time</span> <span class="pre">&gt;</span> <span class="pre">(select</span> <span class="pre">max(event_time)</span> <span class="pre">from</span> <span class="pre">{{</span> <span class="pre">this</span> <span class="pre">}})</span> <span class="pre">{%</span> <span class="pre">endif</span> <span class="pre">%}</span></code>. Then it runs <code class="docutils literal notranslate"><span class="pre">MERGE</span> <span class="pre">INTO</span></code> sql statements that inserts/updates rows in the table.</p></td>
 </tr>
 <tr class="row-even"><td class="text-align:left"><p>schema</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">dev_fullname</span></code></p></td>
@@ -728,7 +728,7 @@ title="Print to PDF"
 </tr>
 <tr class="row-odd"><td class="text-align:left"><p>schema</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">prod</span></code></p></td>
-<td><p>Schema for production, usually behind BI tool, e.g. Matabase in our case.</p></td>
+<td><p>Schema for production, usually behind BI tool.</p></td>
 </tr>
 </tbody>
 </table>

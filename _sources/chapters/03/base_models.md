@@ -16,7 +16,7 @@ Values for each data source are defined in `_src_[sourcename].yml` which was don
 * `table_name`: The `name:` defined under a `tables:` key
 :::
 
-📝 **example for `base_jaffle_shop__customers.sql`**
+📝 **example for `base_jaffle_shop_customers.sql`**
 
  ```
 with
@@ -39,3 +39,7 @@ customers as (
 
 select * from customers
  ```
+
+ To create base models in database, run `dbt run` command in terminal
+
+ ![title](../../images/gifs/dbt_base_model.gif)

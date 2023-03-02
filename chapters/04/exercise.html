@@ -482,12 +482,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solution">
+   Solution
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -499,6 +523,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solution">
+   Solution
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -508,7 +545,137 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="exercise">
 <h1>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h1>
-<p>TODO</p>
+<p>In this exercise we will create simple dimensional model consisting of one dimension table (<code class="docutils literal notranslate"><span class="pre">dim_customers</span></code>) and two fact tables (<code class="docutils literal notranslate"><span class="pre">fact_orders</span></code> and <code class="docutils literal notranslate"><span class="pre">fact_traffic</span></code> - which you can already find as <a class="reference external" href="../04/marts.html#creating-core-folder">the example</a>.</p>
+<ol class="simple">
+<li><p><strong>create <code class="docutils literal notranslate"><span class="pre">dim_customer</span></code></strong>: create dimension table for customers consisting of 3 staging models: <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_customers</span></code>, <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders</span></code> and <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders_value</span></code>. Create SQL query which will calculate date of <code class="docutils literal notranslate"><span class="pre">first_order</span></code> and <code class="docutils literal notranslate"><span class="pre">last_order</span></code> for the customer and their number of orders (<code class="docutils literal notranslate"><span class="pre">no_of_orders</span></code>) and total amount paid (<code class="docutils literal notranslate"><span class="pre">total_amount</span></code>) for all orders. Follow <a class="reference external" href="../04/marts.html#creating-core-folder">the recommended structure</a> while building SQL.</p></li>
+<li><p><strong>create <code class="docutils literal notranslate"><span class="pre">fact_orders</span></code></strong>: create fact table for orders consisting of 2 staging models: <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders</span></code> and <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders_value</span></code>. Include <code class="docutils literal notranslate"><span class="pre">order_id</span></code>, <code class="docutils literal notranslate"><span class="pre">order_date</span></code>, <code class="docutils literal notranslate"><span class="pre">customer_id</span></code>, <code class="docutils literal notranslate"><span class="pre">status</span></code>, <code class="docutils literal notranslate"><span class="pre">total_amount</span></code> and <code class="docutils literal notranslate"><span class="pre">coupon_amount</span></code> columns. All these information were already calculated in staging layer, so there is no need for further calculations.</p></li>
+<li><p><strong>create <code class="docutils literal notranslate"><span class="pre">fact_traffic</span></code></strong>: copy-paste SQL from <a class="reference external" href="../04/marts.html#creating-core-folder">the provided example</a> into <code class="docutils literal notranslate"><span class="pre">fact_traffic.sql</span></code></p></li>
+<li><p>run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> command to create tables</p></li>
+</ol>
+<p><img alt="title" src="../../_images/dbt_run.gif" /></p>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">dim_customers.sql</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">customers</span> <span class="k">as</span> <span class="p">(</span>
+
+ <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_jaffle_shop_customers&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">),</span> <span class="n">orders</span> <span class="k">as</span> <span class="p">(</span>
+
+ <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_jaffle_shop_orders&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">),</span> <span class="n">payments</span> <span class="k">as</span> <span class="p">(</span>
+
+ <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_jaffle_shop_orders_value&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">),</span> <span class="n">customer_orders</span> <span class="k">as</span> <span class="p">(</span>
+
+ <span class="n">select</span>
+   <span class="n">customer_id</span><span class="p">,</span>
+   <span class="nb">min</span><span class="p">(</span><span class="n">order_date</span><span class="p">)</span> <span class="k">as</span> <span class="n">first_order</span><span class="p">,</span>
+   <span class="nb">max</span><span class="p">(</span><span class="n">order_date</span><span class="p">)</span> <span class="k">as</span> <span class="n">last_order</span><span class="p">,</span>
+   <span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">no_of_orders</span>
+ <span class="kn">from</span> <span class="nn">orders</span>
+ <span class="n">group</span> <span class="n">by</span> <span class="mi">1</span>
+
+<span class="p">),</span> <span class="n">customer_amounts</span> <span class="k">as</span> <span class="p">(</span>
+
+ <span class="n">select</span>
+   <span class="n">orders</span><span class="o">.</span><span class="n">customer_id</span><span class="p">,</span>
+   <span class="nb">sum</span><span class="p">(</span><span class="n">payments</span><span class="o">.</span><span class="n">total_amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">total_amount</span>
+ <span class="kn">from</span> <span class="nn">orders</span>
+ <span class="n">left</span> <span class="n">join</span> <span class="n">payments</span> <span class="n">on</span> <span class="n">orders</span><span class="o">.</span><span class="n">order_id</span> <span class="o">=</span> <span class="n">payments</span><span class="o">.</span><span class="n">order_id</span>
+ <span class="n">group</span> <span class="n">by</span> <span class="mi">1</span>
+
+<span class="p">),</span> <span class="n">final</span> <span class="k">as</span> <span class="p">(</span>
+
+ <span class="n">select</span> 
+   <span class="n">customers</span><span class="o">.</span><span class="n">customer_id</span><span class="p">,</span>
+   <span class="n">customers</span><span class="o">.</span><span class="n">first_name</span><span class="p">,</span>
+   <span class="n">customers</span><span class="o">.</span><span class="n">last_name</span><span class="p">,</span>
+   <span class="n">customers</span><span class="o">.</span><span class="n">full_name</span><span class="p">,</span>
+   <span class="n">customer_orders</span><span class="o">.</span><span class="n">first_order</span><span class="p">,</span>
+   <span class="n">customer_orders</span><span class="o">.</span><span class="n">last_order</span><span class="p">,</span>
+   <span class="n">customer_orders</span><span class="o">.</span><span class="n">no_of_orders</span><span class="p">,</span>
+   <span class="n">customer_amounts</span><span class="o">.</span><span class="n">total_amount</span>
+ <span class="kn">from</span> <span class="nn">customers</span>
+ <span class="n">left</span> <span class="n">join</span> <span class="n">customer_orders</span> <span class="n">on</span> <span class="n">customers</span><span class="o">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">customer_orders</span><span class="o">.</span><span class="n">customer_id</span>
+ <span class="n">left</span> <span class="n">join</span> <span class="n">customer_amounts</span> <span class="n">on</span> <span class="n">customers</span><span class="o">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">customer_amounts</span><span class="o">.</span><span class="n">customer_id</span>
+
+<span class="p">)</span>
+
+<span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="nn">final</span>
+
+</pre></div>
+</div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">fact_orders.sql</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">orders</span> <span class="k">as</span> <span class="p">(</span>
+
+  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_jaffle_shop_orders&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">),</span> <span class="n">payments</span> <span class="k">as</span> <span class="p">(</span>
+
+  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_jaffle_shop_orders_value&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">),</span> <span class="n">final</span> <span class="k">as</span> <span class="p">(</span>
+
+  <span class="n">select</span> 
+    <span class="n">orders</span><span class="o">.</span><span class="n">order_id</span><span class="p">,</span>
+    <span class="n">orders</span><span class="o">.</span><span class="n">order_date</span><span class="p">,</span>
+    <span class="n">orders</span><span class="o">.</span><span class="n">customer_id</span><span class="p">,</span>
+    <span class="n">orders</span><span class="o">.</span><span class="n">status</span><span class="p">,</span>
+    <span class="n">payments</span><span class="o">.</span><span class="n">total_amount</span><span class="p">,</span>
+    <span class="n">payments</span><span class="o">.</span><span class="n">coupon_amount</span>
+  <span class="kn">from</span> <span class="nn">orders</span>
+  <span class="n">left</span> <span class="n">join</span> <span class="n">payments</span> <span class="n">on</span> <span class="n">orders</span><span class="o">.</span><span class="n">order_id</span> <span class="o">=</span> <span class="n">payments</span><span class="o">.</span><span class="n">order_id</span>
+
+<span class="p">)</span>
+
+<span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="nn">final</span>
+
+</pre></div>
+</div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">fact_traffic.sql</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">traffic</span> <span class="k">as</span> <span class="p">(</span>
+
+  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_google_analytics_traffic&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">),</span> <span class="n">orders</span> <span class="k">as</span> <span class="p">(</span>
+
+  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_jaffle_shop_orders&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">),</span> <span class="n">orders_daily</span> <span class="k">as</span> <span class="p">(</span>
+
+  <span class="n">select</span>
+    <span class="n">orders</span><span class="o">.</span><span class="n">order_date</span> <span class="k">as</span> <span class="n">order_date</span><span class="p">,</span>
+    <span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">orders_amount</span>
+  <span class="kn">from</span> <span class="nn">orders</span>
+  <span class="n">group</span> <span class="n">by</span> <span class="mi">1</span>
+
+<span class="p">),</span> <span class="n">final</span> <span class="k">as</span> <span class="p">(</span>
+
+<span class="n">select</span> 
+    <span class="n">traffic</span><span class="o">.</span><span class="n">date</span><span class="p">,</span>
+    <span class="n">traffic</span><span class="o">.</span><span class="n">sessions</span><span class="p">,</span>
+    <span class="n">traffic</span><span class="o">.</span><span class="n">visitors</span><span class="p">,</span>
+    <span class="n">traffic</span><span class="o">.</span><span class="n">page_views</span><span class="p">,</span>
+    <span class="n">orders_daily</span><span class="o">.</span><span class="n">orders_amount</span><span class="p">,</span>
+    <span class="nb">round</span><span class="p">((</span><span class="n">orders_daily</span><span class="o">.</span><span class="n">orders_amount</span><span class="p">::</span><span class="n">decimal</span> <span class="o">/</span> <span class="n">traffic</span><span class="o">.</span><span class="n">visitors</span> <span class="o">*</span> <span class="mi">100</span> <span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">coversion_rate</span>
+  <span class="kn">from</span> <span class="nn">traffic</span>
+  <span class="n">left</span> <span class="n">join</span> <span class="n">orders_daily</span> <span class="n">on</span> <span class="n">traffic</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">orders_daily</span><span class="o">.</span><span class="n">order_date</span>
+
+<span class="p">)</span>
+
+<span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="nn">final</span>
+</pre></div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

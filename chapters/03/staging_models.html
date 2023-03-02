@@ -509,7 +509,7 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="staging-models-stg-sourcename-tablename-sql">
 <h1>Staging models - <code class="docutils literal notranslate"><span class="pre">stg_[sourcename]_[tablename].sql</span></code><a class="headerlink" href="#staging-models-stg-sourcename-tablename-sql" title="Permalink to this headline">#</a></h1>
 <p>Staging models are built on top of base models. In this layer we can <strong>enrich</strong>, <strong>aggregate</strong> and <strong>filter</strong> base model or <strong>join</strong> multiple base models within one source together.</p>
-<p>📝 <strong>example for <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop__customers.sql</span></code></strong></p>
+<p>📝 <strong>example for <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_customers.sql</span></code></strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">customers</span> <span class="k">as</span> <span class="p">(</span>
 
   <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;base_jaffle_shop_customers&#39;</span><span class="p">)</span> <span class="p">}}</span>
@@ -528,6 +528,7 @@ title="Print to PDF"
 <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="nn">enriched</span>
 </pre></div>
 </div>
+<p>To create staging models in database, run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> command in terminal</p>
 </section>
 
     <script type="text/x-thebe-config">

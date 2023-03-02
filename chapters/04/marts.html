@@ -588,11 +588,94 @@ title="Print to PDF"
 <h2>Creating <code class="docutils literal notranslate"><span class="pre">core</span></code> folder<a class="headerlink" href="#creating-core-folder" title="Permalink to this headline">#</a></h2>
 <p>In our example, we will be creating <code class="docutils literal notranslate"><span class="pre">core</span></code> folder within <code class="docutils literal notranslate"><span class="pre">marts</span></code> folder.</p>
 <p><strong>Setup:</strong></p>
-<ol class="simple">
+<ol>
 <li><p>go to <code class="docutils literal notranslate"><span class="pre">models/marts</span></code> folder and create <code class="docutils literal notranslate"><span class="pre">core</span></code> folder</p></li>
 <li><p>create <code class="docutils literal notranslate"><span class="pre">_core.yml</span></code> where we store documentation and tests for the tables</p></li>
-<li><p>create <code class="docutils literal notranslate"><span class="pre">dim_[].sql</span></code> and <code class="docutils literal notranslate"><span class="pre">fact_[].sql</span></code> files with SQL transformations</p></li>
+<li><p>create <code class="docutils literal notranslate"><span class="pre">dim_[].sql</span></code> and <code class="docutils literal notranslate"><span class="pre">fact_[].sql</span></code> files with SQL transformations following this recommended structure:</p>
+<ul>
+<li><p>create <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">CTE</span> <span class="pre">table</span> <span class="pre">for</span> <span class="pre">each</span> <span class="pre">staging</span> <span class="pre">model</span></code> from which you are selecting</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="k">with</span> <span class="n">traffic</span> <span class="k">as</span> <span class="p">(</span>
+
+       <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_google_analytics_traffic&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+   <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>create <code class="docutils literal notranslate"><span class="pre">helping</span> <span class="pre">CTEs</span> <span class="pre">for</span> <span class="pre">additional</span> <span class="pre">calculations</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">orders_daily</span> <span class="k">as</span> <span class="p">(</span>
+
+        <span class="n">select</span>
+            <span class="n">orders</span><span class="o">.</span><span class="n">order_date</span> <span class="k">as</span> <span class="n">order_date</span><span class="p">,</span>
+            <span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">orders_amount</span>
+        <span class="kn">from</span> <span class="nn">orders</span>
+        <span class="n">group</span> <span class="n">by</span> <span class="mi">1</span>
+
+    <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>create <code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">final</span> <span class="pre">CTE</span></code> which will bring together all helping CTEs</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">final</span> <span class="k">as</span> <span class="p">(</span>
+
+    <span class="n">select</span> 
+        <span class="n">traffic</span><span class="o">.</span><span class="n">date</span><span class="p">,</span>
+        <span class="n">traffic</span><span class="o">.</span><span class="n">sessions</span><span class="p">,</span>
+        <span class="n">traffic</span><span class="o">.</span><span class="n">visitors</span><span class="p">,</span>
+        <span class="n">traffic</span><span class="o">.</span><span class="n">page_views</span><span class="p">,</span>
+        <span class="n">orders_daily</span><span class="o">.</span><span class="n">orders_amount</span><span class="p">,</span>
+        <span class="nb">round</span><span class="p">((</span><span class="n">orders_daily</span><span class="o">.</span><span class="n">orders_amount</span><span class="p">::</span><span class="n">decimal</span> <span class="o">/</span> <span class="n">traffic</span><span class="o">.</span><span class="n">visitors</span> <span class="o">*</span> <span class="mi">100</span> <span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">coversion_rate</span>
+    <span class="kn">from</span> <span class="nn">traffic</span>
+    <span class="n">left</span> <span class="n">join</span> <span class="n">orders_daily</span> <span class="n">on</span> <span class="n">traffic</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">orders_daily</span><span class="o">.</span><span class="n">order_date</span>
+
+    <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">select</span> <span class="pre">*</span> <span class="pre">from</span> <span class="pre">final</span></code></p></li>
+</ul>
+</li>
 </ol>
+<p>📝 <strong>example for <code class="docutils literal notranslate"><span class="pre">fact_traffic.sql</span></code></strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">traffic</span> <span class="k">as</span> <span class="p">(</span>
+
+ <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_google_analytics_traffic&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">),</span> <span class="n">orders</span> <span class="k">as</span> <span class="p">(</span>
+
+ <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_jaffle_shop_orders&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">),</span> <span class="n">orders_daily</span> <span class="k">as</span> <span class="p">(</span>
+
+ <span class="n">select</span>
+   <span class="n">orders</span><span class="o">.</span><span class="n">order_date</span> <span class="k">as</span> <span class="n">order_date</span><span class="p">,</span>
+   <span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">orders_amount</span>
+ <span class="kn">from</span> <span class="nn">orders</span>
+ <span class="n">group</span> <span class="n">by</span> <span class="mi">1</span>
+
+<span class="p">),</span> <span class="n">final</span> <span class="k">as</span> <span class="p">(</span>
+
+<span class="n">select</span> 
+   <span class="n">traffic</span><span class="o">.</span><span class="n">date</span><span class="p">,</span>
+   <span class="n">traffic</span><span class="o">.</span><span class="n">sessions</span><span class="p">,</span>
+   <span class="n">traffic</span><span class="o">.</span><span class="n">visitors</span><span class="p">,</span>
+   <span class="n">traffic</span><span class="o">.</span><span class="n">page_views</span><span class="p">,</span>
+   <span class="n">orders_daily</span><span class="o">.</span><span class="n">orders_amount</span><span class="p">,</span>
+   <span class="nb">round</span><span class="p">((</span><span class="n">orders_daily</span><span class="o">.</span><span class="n">orders_amount</span><span class="p">::</span><span class="n">decimal</span> <span class="o">/</span> <span class="n">traffic</span><span class="o">.</span><span class="n">visitors</span> <span class="o">*</span> <span class="mi">100</span> <span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">coversion_rate</span>
+ <span class="kn">from</span> <span class="nn">traffic</span>
+ <span class="n">left</span> <span class="n">join</span> <span class="n">orders_daily</span> <span class="n">on</span> <span class="n">traffic</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">orders_daily</span><span class="o">.</span><span class="n">order_date</span>
+
+<span class="p">)</span>
+
+<span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="nn">final</span>
+</pre></div>
+</div>
+<p>Once it is all set, don’t forget to run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> command in terminal to create all tables in database.</p>
+<div class="tip admonition">
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span> <span class="pre">--select</span> <span class="pre">[model_folder/model_name]</span></code></p>
+<p>You can add flag <code class="docutils literal notranslate"><span class="pre">--select</span></code> to <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> command and specify model name or model folder to execute only subset of models.
+<img alt="title" src="../../_images/dbt_marts.gif" /></p>
+</div>
 <div class="tip admonition">
 <p class="admonition-title">Data marts covering multiple areas</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">marts</span></code> folder typically contains multiple subfolders, each of which corresponds to a specific business function or analytical domain. For example, you might have a <em>finance</em> subfolder that contains tables related to finance data, a <em>marketing</em> subfolder that contains tables related to marketing data, and so on.</p>

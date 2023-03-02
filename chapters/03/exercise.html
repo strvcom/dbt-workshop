@@ -546,10 +546,18 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="exercise">
 <h1>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h1>
 <ol class="simple">
-<li><p><strong>Create base models:</strong> create base models for each source table (total 4 base models). Make sure all <code class="docutils literal notranslate"><span class="pre">id</span></code> columns are renamed according to the entity they represent e.g. for customer table set <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">as</span> <span class="pre">customer_id</span></code>.</p></li>
-<li><p><strong>Create staging models:</strong> create staging models for each base table (total 4 staging models).</p></li>
+<li><p><strong>Create base models:</strong> create base models for each source table (total 4 base models). Make sure all <code class="docutils literal notranslate"><span class="pre">id</span></code> columns are renamed according to the entity they represent e.g. for customer table set <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">as</span> <span class="pre">customer_id</span></code>. <em>(tip: sample SQL for <code class="docutils literal notranslate"><span class="pre">base_jaffle_shop_customers</span></code> is already included as <a class="reference internal" href="base_models.html"><span class="doc std std-doc">the example</span></a> in the lecture)</em></p></li>
+<li><p><strong>Create staging models:</strong></p>
+<ul class="simple">
+<li><p>firstly create staging models for each base table (total 4 staging models). In <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_payments</span></code> filter only payments where amount is bigger than 0. <em>(tip: sample SQL for <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_customers</span></code> is already included as <a class="reference internal" href="staging_models.html"><span class="doc std std-doc">the example</span></a> in the lecture)</em></p></li>
+<li><p>then create one additional <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders_value</span></code> model which will be selecting from already created <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_payments</span></code> model in the previous step. This model should contain columns: <code class="docutils literal notranslate"><span class="pre">order_id</span></code>, <code class="docutils literal notranslate"><span class="pre">total_amount</span></code> and <code class="docutils literal notranslate"><span class="pre">coupon_amount</span></code> (tip: use case when payment_method …)</p></li>
+</ul>
+</li>
 <li><p><strong>Fill <code class="docutils literal notranslate"><span class="pre">_stg_[sourcename].yml</span></code> files:</strong> finish <a class="reference external" href="../03/documentation_tests.html#summary">the provided example</a>   for <code class="docutils literal notranslate"><span class="pre">_stg_jaffle_shop.yml</span></code> file and fill <code class="docutils literal notranslate"><span class="pre">_stg_google_analytics.yml</span></code>.</p></li>
 </ol>
+<p>Once it is all set, don’t forget to run your models by <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> command and test your models by <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">test</span></code> in your terminal</p>
+<p><img alt="title" src="../../_images/dbt_run_staging.gif" /></p>
+<p><img alt="title" src="../../_images/dbt_test.gif" /></p>
 <section id="solution">
 <h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h2>
 <p><strong>1. Base models</strong></p>
@@ -706,6 +714,19 @@ title="Print to PDF"
 <span class="p">)</span>
 
 <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="nn">filtered</span>
+</pre></div>
+</div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">stg_google_analytics_traffic.sql</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">traffic</span> <span class="k">as</span> <span class="p">(</span>
+
+  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;base_google_analytics_traffic&#39;</span><span class="p">)</span> <span class="p">}}</span>
+
+<span class="p">)</span>
+
+<span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="nn">traffic</span>
+
 </pre></div>
 </div>
 </div>

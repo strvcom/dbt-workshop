@@ -2,7 +2,7 @@
 
 Staging models are built on top of base models. In this layer we can **enrich**, **aggregate** and **filter** base model or **join** multiple base models within one source together.
 
-📝 **example for `stg_jaffle_shop__customers.sql`**
+📝 **example for `stg_jaffle_shop_customers.sql`**
 
 ```
 with customers as (
@@ -22,3 +22,5 @@ with customers as (
 
 select * from enriched
 ```
+
+ To create staging models in database, run `dbt run` command in terminal
