@@ -72,6 +72,9 @@ models:
           - unique
           - not_null
 ```
+To check your test, run `dbt test` command in terminal
+
+ ![title](../../images/gifs/dbt_test.gif)
 
 ## Summary 
 
