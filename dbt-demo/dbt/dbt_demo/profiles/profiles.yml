@@ -1,0 +1,12 @@
+dbt-demo:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: database
+      user: postgres
+      password: postgres
+      port: 5432
+      dbname: datawarehouse
+      schema: dbt
+      threads: 1
