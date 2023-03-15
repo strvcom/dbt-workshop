@@ -21,7 +21,7 @@ Now we should have some fresh and updated records in our DB.
 
 ## Exercise
 
-1. **create `dim_customers_snapshot`**: create `dim_customers_snapshot.sql` model in `snapshots` folder according to [the provided example](../05/historization.html#creating-snapshots). Check `all` columns for the change.
+1. **create `dim_customers_snapshot`**: create `dim_customers_snapshot.sql` model in `snapshots` folder according to [the provided example](../05/historization.md#creating-snapshots). Check `all` columns for the change.
 2. **create `fact_orders_snapshot`**: create `fact_orders_snapshot.sql` model. Check only `status` column for the change.
 3. run `dbt run` to load new and updated records into our models
 4. run `dbt snapshot` to create snapshots 

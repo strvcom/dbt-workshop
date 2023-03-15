@@ -1,12 +1,12 @@
 # Exercise
 
-In this exercise we will create simple dimensional model consisting of one dimension table (`dim_customers`) and two fact tables (`fact_orders` and `fact_traffic` - which you can already find as [the example](../04/marts.html#creating-core-folder).
+In this exercise we will create simple dimensional model consisting of one dimension table (`dim_customers`) and two fact tables (`fact_orders` and `fact_traffic` - which you can already find as [the example](../04/marts.md#creating-core-folder).
 
-1. **create `dim_customer`**: create dimension table for customers consisting of 3 staging models: `stg_jaffle_shop_customers`, `stg_jaffle_shop_orders` and `stg_jaffle_shop_value`. Create SQL query which will calculate date of `first_order` and `last_order` for the customer and their number of orders (`no_of_orders`) and total amount paid (`total_amount`) for all orders. Follow [the recommended structure](../04/marts.html#creating-core-folder) while building SQL.
+1. **create `dim_customer`**: create dimension table for customers consisting of 3 staging models: `stg_jaffle_shop_customers`, `stg_jaffle_shop_orders` and `stg_jaffle_shop_value`. Create SQL query which will calculate date of `first_order` and `last_order` for the customer and their number of orders (`no_of_orders`) and total amount paid (`total_amount`) for all orders. Follow [the recommended structure](../04/marts.md#creating-core-folder) while building SQL.
 
 2. **create `fact_orders`**: create fact table for orders consisting of 2 staging models: `stg_jaffle_shop_orders` and `stg_jaffle_shop_value`. Include `order_id`, `order_date`, `customer_id`, `status`, `total_amount` and `coupon_amount` columns. All these information were already calculated in staging layer, so there is no need for further calculations.
 
-3. **create `fact_traffic`**: copy-paste SQL from [the provided example](../04/marts.html#creating-core-folder) into `fact_traffic.sql`
+3. **create `fact_traffic`**: copy-paste SQL from [the provided example](../04/marts.md#creating-core-folder) into `fact_traffic.sql`
 
 4. run `dbt run` command to create tables
 
