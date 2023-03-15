@@ -8,7 +8,7 @@
 
 ```yaml
 models:
-  dbt_workshop:
+  dbt_demo:
     staging:
       materialized: view
     marts:
