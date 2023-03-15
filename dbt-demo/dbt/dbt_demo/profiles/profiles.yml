@@ -8,5 +8,5 @@ dbt-demo:
       password: postgres
       port: 5432
       dbname: datawarehouse
-      schema: dbt
+      schema: dbt_seeds
       threads: 1

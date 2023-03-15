@@ -7,11 +7,11 @@ To proceed with this exercise we first need to have some new or updated records 
 
 2. copy the `update.sql` file into the container using the following command:
 
-    `docker cp update.sql dbt-workshop-database-1:/update.sql` (WIP)
+    `docker cp update.sql dbt-workshop_database_1:/update.sql` (WIP)
 
 2. connect to the Postgres container:
 
-    `docker exec -it  dbt-workshop-database-1 psql -U postgres datawarehouse`  (WIP)
+    `docker exec -it  dbt-workshop_database_1 psql -U postgres datawarehouse`  (WIP)
 
 3. run the .sql file inside Postgres container:
 

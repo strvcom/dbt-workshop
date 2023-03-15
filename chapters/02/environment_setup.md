@@ -10,5 +10,5 @@
 
 
 2. once you are in `dbt-demo` folder, run `docker-compose up`
-3. attach to docker container with dbt `docker exec -it dbt-demo-dbt-1 /bin/bash`
+3. attach to docker container with dbt `docker exec -it dbt-demo_dbt_1 /bin/bash`
 4. you are now in dbt container where you can execute `dbt` commands
