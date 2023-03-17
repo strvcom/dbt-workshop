@@ -33,6 +33,16 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   dbt_demo:
-    # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+    staging:
+      materialized: view
+    marts:
+      +schema: marts
+      core:
+        materialized: table
+    python_scripts: 
+      materialized: view
+
+vars:
+  fal-models-paths: [models/python_scripts]
+
+
