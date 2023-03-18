@@ -39,10 +39,10 @@ models:
       +schema: marts
       core:
         materialized: table
-    python_scripts: 
-      materialized: view
+    ml: 
+      materialized: table
 
 vars:
-  fal-models-paths: [models/python_scripts]
+  fal-models-paths: [models/ml]
 
 
