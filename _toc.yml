@@ -38,5 +38,5 @@ parts:
         - file: chapters/05/exercise
 - caption: dbt Python Model
   chapters:
-    - file:  chapters/06/intro
+    - file:  chapters/06/exercise
 
