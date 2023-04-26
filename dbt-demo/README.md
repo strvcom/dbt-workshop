@@ -13,7 +13,7 @@ This is a _dbt_ demo project. You can use this as a template or to learn _dbt_ o
 1. Clone this repository
 2. Navigate to the directory
 3. Run 'docker-compose up'
-4. Attach to docker container with dbt `docker exec -it dbt-demo-dbt-1 /bin/bash`
+4. Attach to docker container with dbt `docker exec -w /project/dbt_demo/ -it dbt /bin/bash`
 
 ### How to run docker-compose without the internet connection
 

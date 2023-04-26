@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   dbt:
+    container_name: dbt
     build: .
     restart: always
     tty: true
@@ -13,6 +14,7 @@ services:
         condition: service_healthy
 
   database:
+    container_name: dbt-workshop-db
     image: postgres:13.6-alpine
     restart: always
     environment:
@@ -32,6 +34,7 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
 
   adminer:
+    container_name: dbt-workshop-adminer
     image: adminer
     ports:
       - 8080:8080
