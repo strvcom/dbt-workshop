@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Staging models - stg_[sourcename]_[tablename].sql" href="staging_models.html" />
-    <link rel="prev" title="Creating base &amp; staging models" href="intro.html" />
+    <link rel="prev" title="Creating staging models" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -153,28 +153,36 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../intro.html">
-                    Welcome to dbt Workshop
+                    Transform Your Data Game
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to dbt</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Before workshop</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../01/intro.html">Introduction to dbt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00/before_workshop.html">Before workshop</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Environment &amp; Project setup</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Environment &amp; Project setup</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../02/environment_setup.html">Environment setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../02/project_structure.html">Project structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../02/project_setup.html">Project setup - <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../02/data_sources.html">Data sources - <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../02/exercise.html">Exercise</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/scene.html">Scene</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/reaction.html">Reaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/intro.html">Introduction to dbt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/fundamentals.html">dbt Fundamentals</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Base &amp; Staging models</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Project setup</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02/project_setup.html">Project setup - <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/data_sources.html">Data sources - <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/exercise.html">Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/project_structure.html"><em>BONUS</em> Project structure</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Staging models</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Creating base &amp; staging models</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Creating staging models</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Base models - <code class="docutils literal notranslate"><span class="pre">base_[sourcename]_[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="staging_models.html">Staging models - <code class="docutils literal notranslate"><span class="pre">stg_[sourcename]_[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation_tests.html">Documentation &amp; tests - <code class="docutils literal notranslate"><span class="pre">_stg_[sourcename].yml</span></code></a></li>
@@ -184,23 +192,31 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/exercise.html">Exercise</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Snapshots</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dbt Python Model</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../05/intro.html">Tracking the history with <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">snapshot</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../05/historization.html">Creating historized table - <code class="docutils literal notranslate"><span class="pre">[model_name]_snapshot.sql</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../05/exercise.html">Exercise</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/intro.html">Creating dbt Python model</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/loyalty.html">Loyalty data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/python.html">dbt Python model</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">dbt Python Model</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BONUS Snapshots</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../06/intro.html">Creating dbt Python model</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/intro.html"><em>BONUS</em> Tracking the history with <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">snapshot</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/historization.html">Creating historized table - <code class="docutils literal notranslate"><span class="pre">[model_name]_snapshot.sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/exercise.html">Exercise</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Outro</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07/intro.html">CONGRATULATIONS</a></li>
 </ul>
 
     </div>
@@ -398,9 +414,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="base-models-base-sourcename-tablename-sql">
 <h1>Base models - <code class="docutils literal notranslate"><span class="pre">base_[sourcename]_[tablename].sql</span></code><a class="headerlink" href="#base-models-base-sourcename-tablename-sql" title="Permalink to this heading">#</a></h1>
-<p>Base models are stored in <strong>staging/[sourcename]/base</strong> folder. No transformation are performed in this stage, only renaming or recasting of columns.</p>
-<div class="admonition-use-source-function admonition">
-<p class="admonition-title">Use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">source()</span> <span class="pre">}}</span></code> function</p>
+<p>Base models are stored in <strong>staging/[sourcename]/base</strong> folder. No transformation (joins) are performed in this stage, only renaming or recasting of columns. Simply put: one source table = one base model.</p>
+<div class="admonition-use-source-jinja-function admonition">
+<p class="admonition-title">Use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">source()</span> <span class="pre">}}</span></code> jinja function</p>
 <p>💡 Select from source tables in your models using the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">source()</span> <span class="pre">}}</span></code> function, which is helping define the lineage of your data.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="n">source_name</span><span class="p">,</span> <span class="n">table_name</span><span class="p">)</span> <span class="p">}}</span>
 </pre></div>
@@ -474,7 +490,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Creating base &amp; staging models</p>
+        <p class="prev-next-title">Creating staging models</p>
       </div>
     </a>
     <a class="right-next"

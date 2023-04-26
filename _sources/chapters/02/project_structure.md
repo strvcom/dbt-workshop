@@ -1,4 +1,4 @@
-# Project structure
+# *BONUS* Project structure
 
 Recommended project structure:
 

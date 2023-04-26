@@ -1,6 +1,6 @@
 # Exercise
 
-In this exercise we will create simple dimensional model consisting of one dimension table (`dim_customers`) and two fact tables (`fact_orders` and `fact_traffic` - which you can already find as [the example](../04/marts.html#creating-core-folder).
+In this exercise we will create simple dimensional model consisting of one dimension table (`dim_customers`) and two fact tables (`fact_orders` and `fact_traffic`) - which you can already find as [the example](../04/marts.html#creating-core-folder).
 
 1. **create `dim_customer`**: create dimension table for customers consisting of 3 staging models: `stg_jaffle_shop_customers`, `stg_jaffle_shop_orders` and `stg_jaffle_shop_orders_value`. Create SQL query which will calculate date of `first_order` and `last_order` for the customer and their number of orders (`no_of_orders`) and total amount paid (`total_amount`) for all orders. Follow [the recommended structure](../04/marts.html#creating-core-folder) while building SQL.
 
@@ -133,7 +133,7 @@ select
     traffic.visitors,
     traffic.page_views,
     orders_daily.orders_amount,
-    round((orders_daily.orders_amount::decimal / traffic.visitors * 100 ), 2) as coversion_rate
+    round((orders_daily.orders_amount::decimal / traffic.visitors * 100 ), 2) as conversion_rate
   from traffic
   left join orders_daily on traffic.date = orders_daily.order_date
 

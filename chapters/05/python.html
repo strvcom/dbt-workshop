@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Creating historized table - [model_name]_snapshot.sql &#8212; dbt Workshop</title>
+    <title>dbt Python model &#8212; dbt Workshop</title>
   
   
   
@@ -61,12 +61,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/05/historization';</script>
-    <link rel="canonical" href="https://strvcom.github.io/dbt-workshop/intro.html/chapters/05/historization.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/05/python';</script>
+    <link rel="canonical" href="https://strvcom.github.io/dbt-workshop/intro.html/chapters/05/python.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Exercise" href="exercise.html" />
-    <link rel="prev" title="Tracking the history with dbt snapshot" href="intro.html" />
+    <link rel="next" title="BONUS Tracking the history with dbt snapshot" href="../06/intro.html" />
+    <link rel="prev" title="Loyalty data" href="loyalty.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -153,28 +153,36 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../intro.html">
-                    Welcome to dbt Workshop
+                    Transform Your Data Game
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to dbt</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Before workshop</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../01/intro.html">Introduction to dbt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00/before_workshop.html">Before workshop</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Environment &amp; Project setup</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Environment &amp; Project setup</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../02/environment_setup.html">Environment setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../02/project_structure.html">Project structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../02/project_setup.html">Project setup - <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../02/data_sources.html">Data sources - <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../02/exercise.html">Exercise</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/scene.html">Scene</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/reaction.html">Reaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/intro.html">Introduction to dbt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/fundamentals.html">dbt Fundamentals</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Base &amp; Staging models</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project setup</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Creating base &amp; staging models</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Project setup</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02/project_setup.html">Project setup - <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/data_sources.html">Data sources - <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/exercise.html">Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/project_structure.html"><em>BONUS</em> Project structure</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Staging models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Creating staging models</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../03/base_models.html">Base models - <code class="docutils literal notranslate"><span class="pre">base_[sourcename]_[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/staging_models.html">Staging models - <code class="docutils literal notranslate"><span class="pre">stg_[sourcename]_[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/documentation_tests.html">Documentation &amp; tests - <code class="docutils literal notranslate"><span class="pre">_stg_[sourcename].yml</span></code></a></li>
@@ -184,23 +192,31 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/exercise.html">Exercise</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Snapshots</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dbt Python Model</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Tracking the history with <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">snapshot</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Creating historized table - <code class="docutils literal notranslate"><span class="pre">[model_name]_snapshot.sql</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercise.html">Exercise</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Creating dbt Python model</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="loyalty.html">Loyalty data</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">dbt Python model</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">dbt Python Model</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BONUS Snapshots</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../06/intro.html">Creating dbt Python model</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/intro.html"><em>BONUS</em> Tracking the history with <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">snapshot</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/historization.html">Creating historized table - <code class="docutils literal notranslate"><span class="pre">[model_name]_snapshot.sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/exercise.html">Exercise</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Outro</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07/intro.html">CONGRATULATIONS</a></li>
 </ul>
 
     </div>
@@ -272,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/strvcom/dbt-workshop/issues/new?title=Issue%20on%20page%20%2Fchapters/05/historization.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/strvcom/dbt-workshop/issues/new?title=Issue%20on%20page%20%2Fchapters/05/python.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -302,7 +318,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/chapters/05/historization.md" target="_blank"
+      <li><a href="../../_sources/chapters/05/python.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -384,7 +400,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Creating historized table - [model_name]_snapshot.sql</h1>
+    <h1>dbt Python model</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -394,8 +410,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-dbt-snapshot-works">How dbt snapshot works</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-snapshots">Creating snapshots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-all-things-needed">Setup all things needed</a></li>
 </ul>
             </nav>
         </div>
@@ -407,120 +422,104 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="creating-historized-table-model-name-snapshot-sql">
-<h1>Creating historized table - <code class="docutils literal notranslate"><span class="pre">[model_name]_snapshot.sql</span></code><a class="headerlink" href="#creating-historized-table-model-name-snapshot-sql" title="Permalink to this heading">#</a></h1>
-<p>In our example, we will use dbt snapshot functionality to create Slowly Changing Dimensions (SCD).</p>
-<div class="admonition-type-2-slowly-changing-dimensions admonition">
-<p class="admonition-title">type-2 Slowly Changing Dimensions</p>
-<p>A Slowly Changing Dimension is a dimension table that includes historical data, allowing you to track changes to dimension data over time. Type 2 SCDs <strong>add a new row to the dimension table whenever a change occurs</strong>. This new row contains the updated data while <strong>the old row is marked as inactive</strong>. This allows you to keep a historical record of changes to the dimension data over time.</p>
-</div>
-<section id="how-dbt-snapshot-works">
-<h2>How dbt snapshot works<a class="headerlink" href="#how-dbt-snapshot-works" title="Permalink to this heading">#</a></h2>
-<p>We have an orders table where the status field can be overwritten as the order is processed.</p>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>order_id</p></th>
-<th class="head"><p>status</p></th>
-<th class="head"><p>order_date</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>1</p></td>
-<td><p>placed</p></td>
-<td><p>2018-01-01</p></td>
-</tr>
-</tbody>
-</table>
-<p>Now, the order goes from “placed” to “shipped”. That same record will now look like:</p>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>order_id</p></th>
-<th class="head"><p>status</p></th>
-<th class="head"><p>order_date</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>1</p></td>
-<td><p>shipped</p></td>
-<td><p>2018-01-01</p></td>
-</tr>
-</tbody>
-</table>
-<p>To prevent losing the primary information about <em>placed</em> state, we use dbt snapshots which will add a new row containing the most recent state together with two new columns <strong>dbt_valid_from</strong> and <strong>dbt_valid_to</strong>:</p>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>order_id</p></th>
-<th class="head"><p>status</p></th>
-<th class="head"><p>order_date</p></th>
-<th class="head"><p>dbt_valid_from</p></th>
-<th class="head"><p>dbt_valid_to</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>1</p></td>
-<td><p>placed</p></td>
-<td><p>2018-01-01</p></td>
-<td><p>2018-01-01</p></td>
-<td><p>2018-01-04</p></td>
-</tr>
-<tr class="row-odd"><td><p>1</p></td>
-<td><p>shipped</p></td>
-<td><p>2018-01-01</p></td>
-<td><p>2018-01-04</p></td>
-<td><p><em>null</em></p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="creating-snapshots">
-<h2>Creating snapshots<a class="headerlink" href="#creating-snapshots" title="Permalink to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="dbt-python-model">
+<h1>dbt Python model<a class="headerlink" href="#dbt-python-model" title="Permalink to this heading">#</a></h1>
+<p>To incorporate Python in our workflow, we will use Fal. For more information on Fal, please refer to the <a class="reference external" href="https://fal-ai.github.io/fal/">Fal documentation</a>.
+The latest version of dbt support python models on its own, however these are models running directly inside vendors: e.g. Snowpark or Databricks. Due to limits of this workshops, we are running python model locally and for this purpose Fal AI is perfect choice.</p>
+<section id="setup-all-things-needed">
+<h2>Setup all things needed<a class="headerlink" href="#setup-all-things-needed" title="Permalink to this heading">#</a></h2>
 <ol class="arabic">
-<li><p>Create a <code class="docutils literal notranslate"><span class="pre">[model_name]_snapshot.sql</span></code> file inside <code class="docutils literal notranslate"><span class="pre">snapshots</span></code> folder.</p></li>
-<li><p>Use a snapshot block:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">snapshot</span> <span class="n">orders_snapshot</span> <span class="o">%</span><span class="p">}</span>
+<li><p><strong>fal python models:</strong></p>
+<ol class="arabic">
+<li><p>Create a new folder called <code class="docutils literal notranslate"><span class="pre">ml</span></code> in the <code class="docutils literal notranslate"><span class="pre">models/marts</span></code> folder. This is where we will store our ML models.</p></li>
+<li><p>Inside the <code class="docutils literal notranslate"><span class="pre">ml</span></code> folder, create a new file called <code class="docutils literal notranslate"><span class="pre">_ml.yml</span></code> with model and source defintion.</p>
+<div class="dropdown admonition">
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">_ml.yml</span></code></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 
-<span class="p">{</span><span class="o">%</span> <span class="n">endsnapshot</span> <span class="o">%</span><span class="p">}</span>
+<span class="nt">sources</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ml</span>
+<span class="w">    </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dbt_ml</span>
+<span class="w">    </span><span class="nt">tables</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customer_registration_prediction</span>
+<span class="nt">models</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customer_registration_prediction</span>
+<span class="w">    </span><span class="nt">meta</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">fal</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">scripts</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">after</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customer_registration_prediction.py</span>
 </pre></div>
 </div>
-</li>
-<li><p>Insert select statement which defined what you want to snapshot. Don’t forget to use <code class="docutils literal notranslate"><span class="pre">source</span></code> or <code class="docutils literal notranslate"><span class="pre">ref</span></code> function here.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">snapshot</span> <span class="n">orders_snapshot</span> <span class="o">%</span><span class="p">}</span>
-
-<span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;jaffle_shop&#39;</span><span class="p">,</span> <span class="s1">&#39;orders&#39;</span><span class="p">)</span> <span class="p">}}</span>
-
-<span class="p">{</span><span class="o">%</span> <span class="n">endsnapshot</span> <span class="o">%</span><span class="p">}</span>
-</pre></div>
 </div>
 </li>
-<li><p>Add snapshot configuration using config block:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">snapshot</span> <span class="n">orders_snapshot</span> <span class="o">%</span><span class="p">}</span>
-
-    <span class="p">{{</span>
-        <span class="n">config</span><span class="p">(</span>
-          <span class="n">target_schema</span><span class="o">=</span><span class="s1">&#39;snapshots&#39;</span><span class="p">,</span>
-          <span class="n">unique_key</span><span class="o">=</span><span class="s1">&#39;order_id&#39;</span><span class="p">,</span>
-          <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;check&#39;</span><span class="p">,</span>
-          <span class="n">check_cols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">],</span>
-        <span class="p">)</span>
-    <span class="p">}}</span>
-
-    <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;jaffle_shop&#39;</span><span class="p">,</span> <span class="s1">&#39;orders&#39;</span><span class="p">)</span> <span class="p">}}</span>
-
-<span class="p">{</span><span class="o">%</span> <span class="n">endsnapshot</span> <span class="o">%</span><span class="p">}</span>
+<li><p>Also add the dbt model itself <code class="docutils literal notranslate"><span class="pre">customer_registration_prediction.sql</span></code> with simple query inside.</p>
+<div class="dropdown admonition">
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">customer_registration_prediction.sql</span></code></p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span><span class="w"> </span><span class="mi">1</span>
 </pre></div>
 </div>
-<p><strong>Config block:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">target_schema</span> <span class="pre">(required)</span></code>: where to store snapshot tables</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">unique_key</span> <span class="pre">(required)</span></code>: primary key column</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">strategy</span> <span class="pre">(required)</span></code>: either <em>check</em> or <em>timestamp</em></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">check_cols</span></code>: array of columns to check for changes or <em>‘all’</em> to check all columns</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">updated_at</span></code>: If using the <em>timestamp</em> strategy, the timestamp column to compare</p></li>
-</ul>
+</div>
 </li>
-<li><p>Run command <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">snapshot</span></code> in the terminal to create snapshots</p></li>
 </ol>
-<p><img alt="title" src="../../_images/dbt_snapshot.gif" /></p>
+</li>
+<li><p><strong>fal python scripts:</strong></p>
+<ol class="arabic">
+<li><p>Add prediction script called <code class="docutils literal notranslate"><span class="pre">customer_registration_prediction.py</span></code> into <code class="docutils literal notranslate"><span class="pre">scripts</span></code> subfolders in the dbt project folder with script.</p>
+<div class="dropdown admonition">
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">customer_registration_prediction.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">ref_df</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;dim_customers&#39;</span><span class="p">)</span>
+
+<span class="c1"># fill missing values with 0</span>
+<span class="n">ref_df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Extract the input and output variables</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">ref_df</span><span class="p">[[</span><span class="s2">&quot;no_of_orders&quot;</span><span class="p">,</span> <span class="s2">&quot;total_amount&quot;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">ref_df</span><span class="p">[</span><span class="s2">&quot;is_registered&quot;</span><span class="p">]</span>
+
+<span class="c1"># Create a logstic regression model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+
+<span class="c1"># Fit the model to the data</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Print the intercept and coefficient</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Intercept:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficient:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+
+<span class="n">ref_df</span><span class="p">[</span><span class="s1">&#39;is_predicted_to_register&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Upload a `pandas.DataFrame` back to the datawarehouse</span>
+<span class="n">write_to_model</span><span class="p">(</span><span class="n">ref_df</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span><span class="s1">&#39;is_predicted_to_register&#39;</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Append fal var setting into <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> so fal-ai knows where to find them.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Append fal ai setting into <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">fal-models-paths</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;models/ml&quot;</span>
+<span class="w">  </span><span class="nt">fal-scripts-path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;scripts&quot;</span>
+</pre></div>
+</div>
+</div>
+</li>
+</ol>
+</li>
+<li><p><strong>fal python models:</strong> Ready to run it</p>
+<ol class="arabic simple">
+<li><p>First run the selected new dbt models <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span> <span class="pre">--select</span> <span class="pre">marts.ml.*</span></code></p></li>
+<li><p>Take a look at the created table <code class="docutils literal notranslate"><span class="pre">dbt_ml.customer_registration_prediction</span></code></p></li>
+<li><p>Then run the python script itself <code class="docutils literal notranslate"><span class="pre">fal</span> <span class="pre">run</span></code></p></li>
+<li><p>Now you can take a look at the table again.</p></li>
+</ol>
+</li>
+<li><p>[BONUS] Add staging ml folder and incorporate all the way up into dim so you manager can see it in his dashboard!</p></li>
+</ol>
 </section>
 </section>
 
@@ -556,20 +555,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="loyalty.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tracking the history with <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">snapshot</span></code></p>
+        <p class="prev-next-title">Loyalty data</p>
       </div>
     </a>
     <a class="right-next"
-       href="exercise.html"
+       href="../06/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Exercise</p>
+        <p class="prev-next-title"><em>BONUS</em> Tracking the history with <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">snapshot</span></code></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -591,8 +590,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-dbt-snapshot-works">How dbt snapshot works</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-snapshots">Creating snapshots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-all-things-needed">Setup all things needed</a></li>
 </ul>
   </nav></div>
 

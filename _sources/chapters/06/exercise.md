@@ -3,15 +3,15 @@
 ## Prerequisite
 To proceed with this exercise we first need to have some new or updated records in our database. We have prepared the `update.sql` file with a batch of fresh data which we now import into our current DB. To do that follow the next steps:
 
-1. open the terminal and navigate to the `dbt-workshop/db` folder
+1. open the terminal and navigate to the `dbt-demo/db` folder
 
 2. copy the `update.sql` file into the container using the following command:
 
-    `docker cp update.sql dbt-workshop-database-1:/update.sql` (WIP)
+    `docker cp update.sql dbt-demo_database_1:/update.sql`
 
 2. connect to the Postgres container:
 
-    `docker exec -it  dbt-workshop-database-1 psql -U postgres datawarehouse`  (WIP)
+    `docker exec -it  dbt-demo_database_1 psql -U postgres datawarehouse` 
 
 3. run the .sql file inside Postgres container:
 

@@ -2,8 +2,11 @@
 
 Next section is dedicated to `marts` folder which we have created at the beginning in `models` folder.
 
-## Table of Contents
+We are fans of dimensional data modelling, thus the data model will be as following:
 
-```{tableofcontents}
+![data_model](../../images/data_model.png)
+
+```{admonition} Goal of this section:
+Create final data model in form of star schema: dimensions and facts.
 ```
 

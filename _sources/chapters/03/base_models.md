@@ -1,8 +1,8 @@
 # Base models - `base_[sourcename]_[tablename].sql`
 
-Base models are stored in **staging/[sourcename]/base** folder. No transformation are performed in this stage, only renaming or recasting of columns. 
+Base models are stored in **staging/[sourcename]/base** folder. No transformation (joins) are performed in this stage, only renaming or recasting of columns. Simply put: one source table = one base model.
 
-:::{admonition} Use `{{ source() }}` function
+:::{admonition} Use `{{ source() }}` jinja function
     
 💡 Select from source tables in your models using the `{{ source() }}` function, which is helping define the lineage of your data. 
 
