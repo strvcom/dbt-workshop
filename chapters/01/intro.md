@@ -20,9 +20,7 @@ Time to run our first dbt command
 
 1. First, attach terminal to docker container with dbt
    ```bash
-   docker exec -w /project/dbt_demo/ -it dbt-demo_dbt_1 /bin/bash
-   OR
-   docker exec -w /project/dbt_demo/ -it dbt-demo-dbt-1 /bin/bash
+   docker exec -w /project/dbt_demo/ -it dbt /bin/bash
    ```
 2. You are now in dbt container where you can execute `dbt` commands
 3. Run `dbt debug`

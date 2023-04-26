@@ -11,7 +11,7 @@ To proceed with this exercise we first need to have some new or updated records 
 
 2. connect to the Postgres container:
 
-    `docker exec -it  dbt-demo_database_1 psql -U postgres datawarehouse` 
+    `docker exec -w /project/dbt_demo/ -it dbt-workshop-db /bin/bash` 
 
 3. run the .sql file inside Postgres container:
 
