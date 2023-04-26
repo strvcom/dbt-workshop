@@ -12,7 +12,7 @@ sources:
    description: [Describe source table]
    tables:
      - name: table_test # name by which we reference it, can be the same as in db or different
-       identifier: profiles # name in the db
+       identifier: profiles # optional if name in the db is not same as above
        
  ```
 
@@ -31,9 +31,26 @@ seeds:
  version: 2
  
  sources:
-  - name: raw
+  - name: jaffle_shop
+    schema: raw
     tables:
       - name: orders
+        columns:
+          - name: id
+            tests:
+              - unique
       - name: customers
+        columns: id
+          - name: 
+            tests:
+              - unique
       - name: payments
+        columns:
+          - name: id
+            tests:
+              - unique
 ```
+
+## Exercise
+
+Run `dbt test --select source:jaffle_shop`

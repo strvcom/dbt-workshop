@@ -19,3 +19,7 @@ models:
 4. Inside models folder create subfolders `staging` and `marts`. In the previous step we set up configuration for all models which will be placed in these folders.
 
 5. Inside `staging` folder, create subfolder for each data source, in our case *jaffle_shop* and *google_analytics*
+
+## Exercise - Pro Tip
+
+Run `dbt ls --resource-type model --output path`

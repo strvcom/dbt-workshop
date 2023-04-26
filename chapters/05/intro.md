@@ -1,10 +1,9 @@
-# Tracking the history with `dbt snapshot`
+# Creating dbt Python model
 
-**Snapshots** are used to capture the state of a table or view at a specific point in time. They allow you to create a historical record of changes to your data over time and enable you to compare different versions of your data.
+Python is the language for ML these days and so it makes sense to include an example of how to use it within the pipeline.
 
+![thinking](https://media3.giphy.com/media/DfSXiR60W9MVq/giphy.gif)
 
-## Table of Contents
-
-```{tableofcontents}
+```{admonition} Goal of this section:
+Predict which customer is going to become registered one based on history.
 ```
-

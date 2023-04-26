@@ -4,19 +4,25 @@
 format: jb-book
 root: intro
 parts:
-- caption: Introduction to dbt
+- caption: Before workshop
   chapters:
-    - file: chapters/01/intro
-- caption: Environment & Project setup
+    - file: chapters/00/before_workshop
+- caption: Introduction
   chapters:
-    - file:  chapters/02/intro
+    - file: chapters/01/scene
       sections:
-        - file: chapters/02/environment_setup
-        - file: chapters/02/project_structure
+        - file: chapters/01/reaction
+        - file: chapters/01/intro
+        - file: chapters/01/fundamentals
+- caption: Project setup
+  chapters:
+    - file: chapters/02/intro
+      sections:
         - file: chapters/02/project_setup
         - file: chapters/02/data_sources
         - file: chapters/02/exercise
-- caption: Base & Staging models
+        - file: chapters/02/project_structure
+- caption: Staging models
   chapters:
     - file:  chapters/03/intro
       sections:
@@ -28,15 +34,21 @@ parts:
   chapters:
     - file:  chapters/04/intro
       sections:
-        - file:  chapters/04/marts
+        - file: chapters/04/marts
         - file: chapters/04/exercise
-- caption: Snapshots
+- caption: dbt Python Model
   chapters:
     - file:  chapters/05/intro
       sections:
-        - file: chapters/05/historization
-        - file: chapters/05/exercise
-- caption: dbt Python Model
+        - file:  chapters/05/loyalty
+        - file:  chapters/05/python
+- caption: BONUS Snapshots
   chapters:
-    - file:  chapters/06/exercise
+    - file:  chapters/06/intro
+      sections:
+        - file: chapters/06/historization
+        - file: chapters/06/exercise
+- caption: Outro
+  chapters:
+    - file:  chapters/07/intro
 

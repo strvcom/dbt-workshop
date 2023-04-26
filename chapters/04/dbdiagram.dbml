@@ -1,0 +1,33 @@
+// Use DBML to define your database structure
+// Docs: https://github.com/holistics/dbml/tree/master/dbml-homepage/docs
+
+Table dim_customer {
+  customer_id integer [primary key]
+  first_name varchar
+  last_name varchar
+  full_name varchar
+  first_order date
+  last_order date
+  no_of_orders integer
+  total_amount float
+}
+
+Table fact_orders {
+  order_id integer [primary key]
+  order_date date
+  customer_id integer
+  status varchar
+  total_amount float
+  coupon_amout float
+}
+
+Table fact_traffic {
+  date date [primary key]
+  sessions integer
+  visitors integer
+  page_views integer
+  orders_amount float
+  conversion_rate float
+}
+
+Ref: dim_customer.customer_id > fact_orderds.customer_id // many-to-one
