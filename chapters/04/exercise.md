@@ -133,7 +133,7 @@ select
     traffic.visitors,
     traffic.page_views,
     orders_daily.orders_amount,
-    round((orders_daily.orders_amount::decimal / traffic.visitors * 100 ), 2) as coversion_rate
+    round((orders_daily.orders_amount::decimal / traffic.visitors * 100 ), 2) as conversion_rate
   from traffic
   left join orders_daily on traffic.date = orders_daily.order_date
 
