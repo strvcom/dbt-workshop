@@ -443,7 +443,7 @@ document.write(`
 <li><p>Clone this repository</p></li>
 <li><p>Navigate to the directory</p></li>
 <li><p>Run ‘docker-compose up’</p></li>
-<li><p>Attach to docker container with dbt <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span> <span class="pre">-it</span> <span class="pre">dbt-demo-dbt-1</span> <span class="pre">/bin/bash</span></code></p></li>
+<li><p>Attach to docker container with dbt <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span> <span class="pre">-w</span> <span class="pre">/project/dbt_demo/</span> <span class="pre">-it</span> <span class="pre">dbt</span> <span class="pre">/bin/bash</span></code></p></li>
 </ol>
 <section id="how-to-run-docker-compose-without-the-internet-connection">
 <h3>How to run docker-compose without the internet connection<a class="headerlink" href="#how-to-run-docker-compose-without-the-internet-connection" title="Permalink to this heading">#</a></h3>

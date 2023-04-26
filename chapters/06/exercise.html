@@ -435,7 +435,7 @@ document.write(`
 <p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">cp</span> <span class="pre">update.sql</span> <span class="pre">dbt-demo_database_1:/update.sql</span></code></p>
 </li>
 <li><p>connect to the Postgres container:</p>
-<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span> <span class="pre">-it</span>&#160; <span class="pre">dbt-demo_database_1</span> <span class="pre">psql</span> <span class="pre">-U</span> <span class="pre">postgres</span> <span class="pre">datawarehouse</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span> <span class="pre">-it</span> <span class="pre">dbt-workshop-db</span> <span class="pre">psql</span> <span class="pre">-U</span> <span class="pre">postgres</span> <span class="pre">datawarehouse</span></code></p>
 </li>
 <li><p>run the .sql file inside Postgres container:</p>
 <p><code class="docutils literal notranslate"><span class="pre">\i</span> <span class="pre">update.sql</span></code></p>
