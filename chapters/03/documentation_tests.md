@@ -1,6 +1,6 @@
 # Documentation & tests - `_stg_[sourcename].yml`
 
-In the beginning of this course, we have created `stg_[sourcename].yml` file for each data source we have. These files provide a way to define the properties of dbt models (such as description and used tests) in a structured, human-readable format. 
+To properly documentate and test our newly created models, we will create `_stg_[sourcename].yml` file for each data source we have (e.g. 1 file for jaffle_shop source data and 1 file for google_analytics data). These files are stored in **models/staging/[sourcename]** folder and provide a way to define the properties of dbt models (such as description and used tests) in a structured, human-readable format. 
 
 For example, a typical YAML configuration file for a model might look something like this:
 
@@ -26,12 +26,12 @@ models:
 
 We can define description for each model and column. It can be either simple one line description or if you have a long description, you can use `docs block` and create additional markdown file in the same folder:
 
-* `[model].yml`
+* `_stg_[sourcename].yml`
 ```yaml
 version: 2
 
 models:
-  - name: fact_orders
+  - name: orders
     description: This table has basic information about orders, as well as some derived facts based on payments
 
     columns:

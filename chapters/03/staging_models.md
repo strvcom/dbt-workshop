@@ -1,6 +1,6 @@
 # Staging models - `stg_[sourcename]_[tablename].sql`
 
-Staging models are built on top of base models. In this layer we can **enrich**, **aggregate** and **filter** base model or **join** multiple base models within one source together.
+Staging models are built on top of base models. In this layer we can **enrich**, **aggregate** and **filter** base model or **join** multiple base models within one source together. These files are stored in **models/staging/[sourcename]** folder.
 
 📝 **example for `stg_jaffle_shop_customers.sql`**
 

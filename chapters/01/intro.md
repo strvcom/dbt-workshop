@@ -3,7 +3,7 @@
 
 ## What is dbt?
 
-dbt is the T/transformation in ELT data pipelines. It runs on top of the database/data warehouse and creates DAGs for data transformations. It is `a combination of SQL and Jinja`, which is compiled into database-specific SQL that is run sequentially. Definitions happen in `YAML files` which also serve as a source for documentation. Additionally, dbt gives you testing capabilities so you can see which models = tables are causing trouble.
+dbt is the T/transformation in ELT data pipelines. It runs on top of the database/data warehouse and creates DAGs for data transformations. It is **a combination of SQL and Jinja**, which is compiled into database-specific SQL that is run sequentially. Definitions happen in `YAML files` which also serve as a source for documentation. Additionally, dbt gives you testing capabilities so you can see which models = tables are causing trouble.
 
 ```{warning}
 dbt community has clear consent that dbt should be written in lowercase. Please obey this agreement!

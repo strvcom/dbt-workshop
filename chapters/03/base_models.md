@@ -1,6 +1,6 @@
 # Base models - `base_[sourcename]_[tablename].sql`
 
-Base models are stored in **staging/[sourcename]/base** folder. No transformation (joins) are performed in this stage, only renaming or recasting of columns. Simply put: one source table = one base model.
+Firstly, we start with creation of base models, which are stored in **models/staging/[sourcename]/base** folder. No transformation (joins) are performed in this stage, only renaming or recasting of columns. Simply put: one source table = one base model.
 
 :::{admonition} Use `{{ source() }}` jinja function
     
@@ -23,7 +23,7 @@ with
 
 source as (
 
-    select * from {{ source('raw','customers') }}
+    select * from {{ source('jaffle_shop','customers') }}
 
 ),
 

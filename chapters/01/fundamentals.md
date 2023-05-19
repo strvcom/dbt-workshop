@@ -27,18 +27,6 @@
 jinja is web template engine for Python that uses curly brackets to define it's variables.
 ```
 
-```python
-{%- for item in item_list %}
-    <li>{{ item }}</li>
-{%- endfor %}
-```
-
-```html
-<li>1</li>
-<li>2</li>
-<li>3</li>
-```
-
 | function              | description                                                                                   |
 | :-------------------- | --------------------------------------------------------------------------------------------- |
 | `{{ ref('') }}`       | A jinja function to reference previous models. It doesn't need path inside, filename is enough. |

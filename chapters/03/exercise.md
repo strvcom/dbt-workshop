@@ -283,7 +283,7 @@ version: 2
 
 models:
   - name: base_google_analytics_traffic
-    description: Date field
+    description: Basic information about google analytics traffic.
     columns:
       - name: date
         tests:

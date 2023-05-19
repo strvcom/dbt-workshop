@@ -1,8 +1,18 @@
 # Exercise
     
-1. **Load data:** we have 4 raw tables, 3 of them are jaffle_shop data which are already loaded in our postgres db: *orders*, *customers* and *payments*. GA traffic data are located in *ga_traffic.csv* file seeds folder. To load these dataset run command `dbt seed` in dbt docker container.
-2. **Configure sources:** create and edit `src_[sourcename].yml` for both data sources according [to the example](../02/data_sources.md).
-3. **Test new source:** Define and run tests for ga_traffic data.
+1. **Load data:** 
+  - **Jaffle Shop data** : jaffle_shop data are already loaded in our postgres database: `orders`, `customers` and `payments`, so there is no action needed. 
+  - **Google Analytics data** : traffic data are located in `ga_traffic.csv` file in *seeds* folder. Firstly, add this code snippet into `dbt_project.yml` file at the end. This will create `dbt_seeds` schema inside your database once you run `dbt seed` command.
+      ```yaml
+      seeds:
+        +schema: seeds
+      ```
+    Now run `dbt seed` command in dbt docker container which will load these .csv files into our database. You can double check by looking into `dbt_seeds` schema in DB Adminer.
+
+    ![dbt_seed](../../images/dbt_seeds.png)
+2. **Create source files**: create a source file `_src_[sourcename].yml` for each data source: *jaffle_shop* and *google_analytics*
+2. **Configure source files:** edit both `_src_[sourcename].yml` files according [to the example](../02/data_sources.md).
+3. **Test new source:** Define `unique` test for `id` column in each jaffle_shop table and `date` column in ga_traffic table. Test the uniqueness by running `dbt test` command in dbt container.
 
 
 ## Solution
@@ -44,7 +54,8 @@ sources:
 version: 2
 
 sources:
-  - name: dbt_seeds
+  - name: google_analytics
+    schema: dbt_seeds
     tables:
       - name: ga_traffic
         columns:

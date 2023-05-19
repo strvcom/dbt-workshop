@@ -7,6 +7,6 @@
 Imagine going to work on Monday only to be welcomed by your manager with request
 
 ```{admonition} Task
-Can you predict who's going to register from customers?
+Can you predict which customer is going to register for the loyalty program?
 Every Monday?
 ```

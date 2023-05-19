@@ -1,19 +1,15 @@
-# Building marts - `dim_[name].sql / fact_[name].sql`
+# Building marts - `[tablename].sql`
 
-We can now start creating data marts. In this lecture, we will follow dimensional modeling practice, but other techniques can be also used. 
-
-:::{admonition} Kimball's dimensional modelling
-The key concept of dimensional modeling is the creation of a star schema, which consists of a central **fact table** surrounded by one or more **dimension tables**. `The fact table contains the measures or quantitative data` that is to be analyzed, such as sales revenue or customer orders, while `the dimension tables contain descriptive attributes` or qualitative data, such as product or customer information. The relationship between the fact and dimension tables is established through a set of keys, called foreign keys, that allow the data to be joined together.
-:::
+This is the layer where everything comes together and we start to arrange all of our staging models into marts that have identity and purpose.
 
 ## Creating `core` folder
 
-In our example, we will be creating `core` folder within `marts` folder.
+According to the best practice, it is recommended to create a subfolder for each area of concern within **marts** folder. In our example, we will be creating `core` folder within `marts` folder.
 
 **Setup:**
 1. go to `models/marts` folder and create `core` folder
 2. create `_core.yml` where we store documentation and tests for the tables
-3. create `dim_[].sql` and `fact_[].sql` files with SQL transformations following this recommended structure:
+3. create a `[tablename].sql` file with SQL transformations following this recommended structure:
     * create `a CTE table for each staging model` from which you are selecting 
          ```
             with traffic as (
@@ -53,7 +49,7 @@ In our example, we will be creating `core` folder within `marts` folder.
 
     * `select * from final`
 
-📝 **example for `fact_traffic.sql`**
+📝 **example for `traffic.sql`**
 
  ```
 with traffic as (
@@ -96,7 +92,7 @@ Once it is all set, don't forget to run `dbt run` command in terminal to create 
 
 :::{admonition} `dbt run --select [model_folder/model_name]`
 :class: tip
-You can add flag `--select` to `dbt run` command and specify model name or model folder to execute only subset of models.
+You can add argument `--select` to `dbt run` command and specify model name or model folder to execute only subset of models.
  ![title](../../images/gifs/dbt_marts.gif)
 :::
 
