@@ -41,9 +41,7 @@ models:
       +schema: marts
       core:
         materialized: table
-    ml: 
-      materialized: table
-
-vars:
-  fal-models-paths: [models/ml]
+      ml: 
+        materialized: table
+      
 

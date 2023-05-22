@@ -2,6 +2,7 @@
 
 In this exercise we will create simple model consisting of 3 tables: *customers*, *orders* and *traffic* (you can already find traffic table as [the example](../04/marts.html#creating-core-folder).
 
+1. **setup**: create *core* folder within models/marts and `_core.yml` file.
 1. **create table `customers`**: create a table for customers consisting of 3 staging models: `stg_jaffle_shop_customers`, `stg_jaffle_shop_orders` and `stg_jaffle_shop_orders_value`. Create SQL query which will calculate date of `first_order` and `last_order` for the customer and their number of orders (`no_of_orders`) and total amount paid (`total_amount`) for all orders. Follow [the recommended structure](../04/marts.html#creating-core-folder) while building SQL.
 
 2. **create table `orders`**: create a table for orders consisting of 2 staging models: `stg_jaffle_shop_orders` and `stg_jaffle_shop_orders_value`. Include `order_id`, `order_date`, `customer_id`, `status`, `total_amount` and `coupon_amount` columns. All these information were already calculated in staging layer, so there is no need for further calculations.

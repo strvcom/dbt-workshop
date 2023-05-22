@@ -23,7 +23,7 @@ Once it is all set, don't forget to run your models by `dbt run` command and tes
 ```
 with source as (
 
-  select * from {{ source('raw', 'customers') }}
+  select * from {{ source('jaffle_shop', 'customers') }}
 
 ), renamed as (
 
@@ -46,7 +46,7 @@ select * from renamed
 ```
 with source as (
 
-  select * from {{ source('raw', 'orders') }}
+  select * from {{ source('jaffle_shop', 'orders') }}
 
 ), renamed as (
 
@@ -70,7 +70,7 @@ select * from renamed
 ```
 with source as (
 
-  select * from {{ source('raw', 'payments') }}
+  select * from {{ source('jaffle_shop', 'payments') }}
 
 ), renamed as (
 
@@ -94,20 +94,11 @@ select * from renamed
 ```
 with source as (
 
-  select * from {{ source('dbt_seeds', 'ga_traffic') }}
-
-), renamed as (
-
-  select
-    date,
-    sessions,
-    users as visitors,
-    pageviews as page_views
-  from source
+  select * from {{ source('google_analytics', 'ga_traffic') }}
 
 )
 
-select * from renamed
+select * from source
 
 ```
 :::

@@ -11,7 +11,7 @@
    1. `dbt-workshop-db` - postgres server as our data warehouse
    2. `dbt` - container where to run dbt command 
    3. `dbt-workshop-adminer` - container with adminer, simple SQL IDE available on [localhost:8080](http://localhost:8080)
-4. Log into the adminer to confirm everything is running:
+4. Log into the [adminer](http://localhost:8080) to confirm everything is running:
    1. System: `PostgreSQL`
    2. Server: `database`
    3. Username: `postgres`

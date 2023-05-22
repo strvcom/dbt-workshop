@@ -16,8 +16,8 @@ models:
       +schema: marts
       core:
         materialized: table
-    ml: 
-      materialized: table
+      ml: 
+        materialized: table
 ```
 4. Go to `models` folder and firstly **delete** everything what is inside (it contains sample models which we are not going to use) and **create subfolders** `staging`, `marts` and `ml`. In the previous step we set up configuration for all models which will be placed in these folders.
 
@@ -33,7 +33,7 @@ If everything is setup correctly, you should see this
 09:19:56  [WARNING]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
 There are 4 unused configuration paths:
 - models.dbt_demo.marts.core
-- models.dbt_demo.ml
+- models.dbt_demo.marts.ml
 - models.dbt_demo.marts
 - models.dbt_demo.staging
 ```

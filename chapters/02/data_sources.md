@@ -1,7 +1,9 @@
 # Data sources - `_src_[sourcename].yml`
 
 Inside **each** source subfolder (*jaffle_shop* and *google_analytics*) located in models/staging folder, we need to create `_src_[sourcename].yml` yaml file containing table reference to the raw data. Sources make it possible to name and describe the data loaded into your warehouse. We will setup up these files in the following **Exercise** on the next page.
-    
+
+📝 **example of `_src_[sourcename].yml`**
+
 ```yaml
 version: 2
 
