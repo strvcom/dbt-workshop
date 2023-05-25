@@ -12,7 +12,7 @@ Table customers {
   total_amount float
 }
 
-Table rders {
+Table orders {
   order_id integer [primary key]
   order_date date
   customer_id integer

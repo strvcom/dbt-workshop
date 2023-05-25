@@ -19,7 +19,7 @@ models:
       ml: 
         materialized: table
 ```
-4. Go to `models` folder and firstly **delete** everything what is inside (it contains sample models which we are not going to use) and **create subfolders** `staging`, `marts` and `ml`. In the previous step we set up configuration for all models which will be placed in these folders.
+4. Go to `models` folder and **create subfolders** `staging` and `marts`. In the previous step we set up configuration for all models which will be placed in these folders.
 
 5. Inside `staging` folder, create subfolder for each data source, in our case *jaffle_shop* and *google_analytics*.
 

@@ -76,7 +76,7 @@ The latest version of dbt support python models on its own, however these are mo
 
       ```yaml
       vars:
-        fal-models-paths: "models/ml"
+        fal-models-paths: "models/marts/ml"
         fal-scripts-path: "scripts"
       ```
       :::
