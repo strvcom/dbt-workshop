@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>dbt Python model &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="BONUS Tracking the history with dbt snapshot" href="../06/intro.html" />
     <link rel="prev" title="Loyalty data" href="loyalty.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/exercise.html">Exercise</a></li>
 </ul>
 </li>
@@ -423,16 +422,16 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="dbt-python-model">
-<h1>dbt Python model<a class="headerlink" href="#dbt-python-model" title="Permalink to this heading">#</a></h1>
-<p>To incorporate Python in our workflow, we will use Fal. For more information on Fal, please refer to the <a class="reference external" href="https://fal-ai.github.io/fal/">Fal documentation</a>.
+<h1>dbt Python model<a class="headerlink" href="#dbt-python-model" title="Permalink to this headline">#</a></h1>
+<p>To incorporate Python in our workflow, we will use Fal. For more information on Fal, please refer to the <a class="reference external" href="https://fal.ai/">Fal documentation</a>.
 The latest version of dbt support python models on its own, however these are models running directly inside vendors: e.g. Snowpark or Databricks. Due to limits of this workshops, we are running python model locally and for this purpose Fal AI is perfect choice.</p>
 <section id="setup-all-things-needed">
-<h2>Setup all things needed<a class="headerlink" href="#setup-all-things-needed" title="Permalink to this heading">#</a></h2>
+<h2>Setup all things needed<a class="headerlink" href="#setup-all-things-needed" title="Permalink to this headline">#</a></h2>
 <ol class="arabic">
 <li><p><strong>fal python models:</strong></p>
 <ol class="arabic">
-<li><p>Create a new folder called <code class="docutils literal notranslate"><span class="pre">ml</span></code> in the <code class="docutils literal notranslate"><span class="pre">models/marts</span></code> folder. This is where we will store our ML models.</p></li>
-<li><p>Inside the <code class="docutils literal notranslate"><span class="pre">ml</span></code> folder, create a new file called <code class="docutils literal notranslate"><span class="pre">_ml.yml</span></code> with model and source defintion.</p>
+<li><p>Create a new folder called <code class="docutils literal notranslate"><span class="pre">ml</span></code> in the models/marts folder. This is where we will store our ML models.</p></li>
+<li><p>Inside the <code class="docutils literal notranslate"><span class="pre">ml</span></code> folder, create a new file called <code class="docutils literal notranslate"><span class="pre">_ml.yml</span></code> with model and source definition.</p>
 <div class="dropdown admonition">
 <p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">_ml.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
@@ -465,13 +464,13 @@ The latest version of dbt support python models on its own, however these are mo
 </li>
 <li><p><strong>fal python scripts:</strong></p>
 <ol class="arabic">
-<li><p>Add prediction script called <code class="docutils literal notranslate"><span class="pre">customer_registration_prediction.py</span></code> into <code class="docutils literal notranslate"><span class="pre">scripts</span></code> subfolders in the dbt project folder with script.</p>
+<li><p>Navigate to <code class="docutils literal notranslate"><span class="pre">scripts</span></code> folder in <em>dbt_demo</em> folder and add prediction script called <code class="docutils literal notranslate"><span class="pre">customer_registration_prediction.py</span></code> in it.</p>
 <div class="dropdown admonition">
 <p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">customer_registration_prediction.py</span></code></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
 
-<span class="n">ref_df</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;dim_customers&#39;</span><span class="p">)</span>
+<span class="n">ref_df</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;customers&#39;</span><span class="p">)</span>
 
 <span class="c1"># fill missing values with 0</span>
 <span class="n">ref_df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -502,7 +501,7 @@ The latest version of dbt support python models on its own, however these are mo
 <div class="dropdown admonition">
 <p class="admonition-title">Append fal ai setting into <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vars</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">fal-models-paths</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;models/ml&quot;</span>
+<span class="w">  </span><span class="nt">fal-models-paths</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;models/marts/ml&quot;</span>
 <span class="w">  </span><span class="nt">fal-scripts-path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;scripts&quot;</span>
 </pre></div>
 </div>
@@ -518,7 +517,7 @@ The latest version of dbt support python models on its own, however these are mo
 <li><p>Now you can take a look at the table again.</p></li>
 </ol>
 </li>
-<li><p>[BONUS] Add staging ml folder and incorporate all the way up into dim so you manager can see it in his dashboard!</p></li>
+<li><p>[BONUS] Add staging ml folder and incorporate all the way up into <code class="docutils literal notranslate"><span class="pre">customers</span></code> table so you manager can see it in his dashboard!</p></li>
 </ol>
 </section>
 </section>

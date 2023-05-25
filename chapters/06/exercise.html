@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Exercise &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="CONGRATULATIONS" href="../07/intro.html" />
     <link rel="prev" title="Creating historized table - [model_name]_snapshot.sql" href="historization.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -425,9 +424,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="exercise">
-<h1>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h1>
+<h1>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h1>
 <section id="prerequisite">
-<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading">#</a></h2>
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this headline">#</a></h2>
 <p>To proceed with this exercise we first need to have some new or updated records in our database. We have prepared the <code class="docutils literal notranslate"><span class="pre">update.sql</span></code> file with a batch of fresh data which we now import into our current DB. To do that follow the next steps:</p>
 <ol class="arabic">
 <li><p>open the terminal and navigate to the <code class="docutils literal notranslate"><span class="pre">dbt-demo/db</span></code> folder</p></li>
@@ -444,7 +443,7 @@ document.write(`
 <p>Now we should have some fresh and updated records in our DB.</p>
 </section>
 <section id="id1">
-<h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <ol class="arabic simple">
 <li><p><strong>create <code class="docutils literal notranslate"><span class="pre">dim_customers_snapshot</span></code></strong>: create <code class="docutils literal notranslate"><span class="pre">dim_customers_snapshot.sql</span></code> model in <code class="docutils literal notranslate"><span class="pre">snapshots</span></code> folder according to <span class="xref myst">the provided example</span>. Check <code class="docutils literal notranslate"><span class="pre">all</span></code> columns for the change.</p></li>
 <li><p><strong>create <code class="docutils literal notranslate"><span class="pre">fact_orders_snapshot</span></code></strong>: create <code class="docutils literal notranslate"><span class="pre">fact_orders_snapshot.sql</span></code> model. Check only <code class="docutils literal notranslate"><span class="pre">status</span></code> column for the change.</p></li>
@@ -453,7 +452,7 @@ document.write(`
 </ol>
 </section>
 <section id="solution">
-<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h2>
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">dim_customers_snapshot.sql</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">snapshot</span> <span class="n">dim_customers_snapshot</span> <span class="o">%</span><span class="p">}</span>

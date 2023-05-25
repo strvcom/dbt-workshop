@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Exercise &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="BONUS Project structure" href="project_structure.html" />
     <link rel="prev" title="Data sources - _src_[sourcename].yml" href="data_sources.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/exercise.html">Exercise</a></li>
 </ul>
 </li>
@@ -423,14 +422,33 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="exercise">
-<h1>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h1>
+<h1>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h1>
 <ol class="arabic simple">
-<li><p><strong>Load data:</strong> we have 4 raw tables, 3 of them are jaffle_shop data which are already loaded in our postgres db: <em>orders</em>, <em>customers</em> and <em>payments</em>. GA traffic data are located in <em>ga_traffic.csv</em> file seeds folder. To load these dataset run command <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">seed</span></code> in dbt docker container.</p></li>
-<li><p><strong>Configure sources:</strong> create and edit <code class="docutils literal notranslate"><span class="pre">src_[sourcename].yml</span></code> for both data sources according <a class="reference internal" href="data_sources.html"><span class="doc std std-doc">to the example</span></a>.</p></li>
-<li><p><strong>Test new source:</strong> Define and run tests for ga_traffic data.</p></li>
+<li><p><strong>Load data:</strong></p></li>
+</ol>
+<ul>
+<li><p><strong>Jaffle Shop data</strong> : jaffle_shop data are already loaded in our postgres database: <code class="docutils literal notranslate"><span class="pre">orders</span></code>, <code class="docutils literal notranslate"><span class="pre">customers</span></code> and <code class="docutils literal notranslate"><span class="pre">payments</span></code>, so there is no action needed.</p></li>
+<li><p><strong>Google Analytics data</strong> : traffic data are located in <code class="docutils literal notranslate"><span class="pre">ga_traffic.csv</span></code> file in <em>seeds</em> folder.</p>
+<ul>
+<li><p>Add this code snippet into <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> file at the end. This will create <code class="docutils literal notranslate"><span class="pre">dbt_seeds</span></code> schema inside your database once you run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">seed</span></code> command.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">seeds</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">+schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seeds</span>
+</pre></div>
+</div>
+</li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">seed</span> <span class="pre">--select</span> <span class="pre">ga_traffic</span></code> command in dbt docker container which will load these .csv files into our database. You can double check by looking into <code class="docutils literal notranslate"><span class="pre">dbt_seeds</span></code> schema in DB Adminer.</p></li>
+</ul>
+<p><img alt="dbt_seed" src="../../_images/dbt_seeds.png" /></p>
+</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Create source files</strong>: create a source file <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code> for each data source: <em>jaffle_shop</em> and <em>google_analytics</em> in their folders.</p></li>
+<li><p><strong>Configure source files:</strong> edit both <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code> files according <a class="reference internal" href="data_sources.html"><span class="doc std std-doc">to the example</span></a>.</p></li>
+<li><p><strong>Add tests:</strong> Define <code class="docutils literal notranslate"><span class="pre">unique</span></code> test for <code class="docutils literal notranslate"><span class="pre">id</span></code> column in each jaffle_shop table and <code class="docutils literal notranslate"><span class="pre">date</span></code> column in ga_traffic table.</p></li>
+<li><p><strong>Test the solution</strong>: Test the uniqueness by running <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">test</span></code> command in dbt container.</p></li>
 </ol>
 <section id="solution">
-<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h2>
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">_src_jaffle_shop.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
@@ -462,7 +480,8 @@ document.write(`
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 
 <span class="nt">sources</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dbt_seeds</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">google_analytics</span>
+<span class="w">    </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dbt_seeds</span>
 <span class="w">    </span><span class="nt">tables</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ga_traffic</span>
 <span class="w">        </span><span class="nt">columns</span><span class="p">:</span>

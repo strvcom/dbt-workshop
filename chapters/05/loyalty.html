@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Loyalty data &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="dbt Python model" href="python.html" />
     <link rel="prev" title="Creating dbt Python model" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/exercise.html">Exercise</a></li>
 </ul>
 </li>
@@ -424,10 +423,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="loyalty-data">
-<h1>Loyalty data<a class="headerlink" href="#loyalty-data" title="Permalink to this heading">#</a></h1>
-<p>In this example we will use Python and some simple ML to predict whether a customer will register for a loyalty program. In order to do so, we will use the <code class="docutils literal notranslate"><span class="pre">dim_customers</span></code> table we created in the previous exercise. Let’s first add information which customer is registered already.</p>
+<h1>Loyalty data<a class="headerlink" href="#loyalty-data" title="Permalink to this headline">#</a></h1>
+<p>In this example we will use Python and some simple ML to predict whether a customer will register for a loyalty program. In order to do so, we will use the <code class="docutils literal notranslate"><span class="pre">customers</span></code> table we created in the previous exercise. Let’s first add information which customer is registered already.</p>
 <section id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h2>
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Add data:</strong> To proceed with this exercise we first need to know which customers have registered for the loyalty program. For the sake of simplicity, we got this list in form of csv file. You can find it inside <code class="docutils literal notranslate"><span class="pre">seeds</span></code> folder.</p>
 <ol class="arabic simple">
@@ -438,34 +437,38 @@ document.write(`
 <ol class="arabic simple">
 <li><p>Create subfolder <code class="docutils literal notranslate"><span class="pre">loyalty</span></code> for this new data source in <code class="docutils literal notranslate"><span class="pre">dbt-demo/models/staging/</span></code></p></li>
 <li><p>Add data source defintion into <code class="docutils literal notranslate"><span class="pre">_src_loyalty.yml</span></code></p></li>
-<li><p>Add staging dbt model <code class="docutils literal notranslate"><span class="pre">stg_loyalty_customer.sql</span></code></p></li>
+<li><p>Add staging dbt model <code class="docutils literal notranslate"><span class="pre">stg_loyalty_customers.sql</span></code></p></li>
 <li><p>Add model definition <code class="docutils literal notranslate"><span class="pre">_stg_loyalty.yml</span></code></p></li>
 </ol>
 </li>
-<li><p><strong>Update dim_customers:</strong> Update <code class="docutils literal notranslate"><span class="pre">marts/core/dim_customers.sql</span></code> file to use this new source and show which customers are registered.</p></li>
+<li><p><strong>Update table <code class="docutils literal notranslate"><span class="pre">customers</span></code>:</strong> Update <code class="docutils literal notranslate"><span class="pre">marts/core/customers.sql</span></code> file to use this new source and show which customers are registered.</p></li>
 </ol>
 </section>
 <section id="solution">
-<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h2>
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h2>
 <p><strong>2.2</strong></p>
 <div class="dropdown admonition">
 <p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">_src_loyalty.yml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 
 <span class="nt">sources</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dbt_seeds</span>
-<span class="w">    </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dbt</span>
-<span class="w">    </span><span class="nt">tables</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">loyalty_customers</span>
+<span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">loyalty</span>
+<span class="w">   </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dbt_seeds</span>
+<span class="w">   </span><span class="nt">tables</span><span class="p">:</span>
+<span class="w">     </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">loyalty_customers</span>
+<span class="w">       </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customer_id</span>
+<span class="w">           </span><span class="nt">tests</span><span class="p">:</span>
+<span class="w">             </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unique</span>
 </pre></div>
 </div>
 </div>
 <p><strong>2.3</strong></p>
 <div class="dropdown admonition">
-<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">stg_loyalty_customer.sql</span></code></p>
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">stg_loyalty_customers.sql</span></code></p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>with loyal_customers as (
 
-  select * from {{ source(&#39;dbt_seeds&#39;, &#39;loyalty_customers&#39;) }}
+  select * from {{ source(&#39;loyalty&#39;, &#39;loyalty_customers&#39;) }}
 
 )
 
@@ -479,13 +482,6 @@ select * from loyal_customers
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 
 <span class="nt">models</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_loyalty_customers</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">List of registered customers</span>
-<span class="w">    </span><span class="nt">columns</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customer_id</span>
-<span class="w">        </span><span class="nt">tests</span><span class="p">:</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unique</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stg_loyalty_customers</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">List of registered customers</span>
 <span class="w">    </span><span class="nt">columns</span><span class="p">:</span>
@@ -498,7 +494,7 @@ select * from loyal_customers
 </div>
 <p><strong>3 Update dim customer</strong></p>
 <div class="dropdown admonition">
-<p class="admonition-title">Update <code class="docutils literal notranslate"><span class="pre">dim_customer.sql</span></code></p>
+<p class="admonition-title">Update <code class="docutils literal notranslate"><span class="pre">customers.sql</span></code></p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>...
 , loyalty_customers as (
 

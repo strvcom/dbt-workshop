@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Introduction to dbt &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="dbt Fundamentals" href="fundamentals.html" />
     <link rel="prev" title="Reaction" href="reaction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/exercise.html">Exercise</a></li>
 </ul>
 </li>
@@ -427,21 +426,21 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-dbt">
-<h1>Introduction to dbt<a class="headerlink" href="#introduction-to-dbt" title="Permalink to this heading">#</a></h1>
+<h1>Introduction to dbt<a class="headerlink" href="#introduction-to-dbt" title="Permalink to this headline">#</a></h1>
 <section id="what-is-dbt">
-<h2>What is dbt?<a class="headerlink" href="#what-is-dbt" title="Permalink to this heading">#</a></h2>
-<p>dbt is the T/transformation in ELT data pipelines. It runs on top of the database/data warehouse and creates DAGs for data transformations. It is <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">combination</span> <span class="pre">of</span> <span class="pre">SQL</span> <span class="pre">and</span> <span class="pre">Jinja</span></code>, which is compiled into database-specific SQL that is run sequentially. Definitions happen in <code class="docutils literal notranslate"><span class="pre">YAML</span> <span class="pre">files</span></code> which also serve as a source for documentation. Additionally, dbt gives you testing capabilities so you can see which models = tables are causing trouble.</p>
+<h2>What is dbt?<a class="headerlink" href="#what-is-dbt" title="Permalink to this headline">#</a></h2>
+<p>dbt is the T/transformation in ELT data pipelines. It runs on top of the database/data warehouse and creates DAGs for data transformations. It is <strong>a combination of SQL and Jinja</strong>, which is compiled into database-specific SQL that is run sequentially. Definitions happen in <code class="docutils literal notranslate"><span class="pre">YAML</span> <span class="pre">files</span></code> which also serve as a source for documentation. Additionally, dbt gives you testing capabilities so you can see which models = tables are causing trouble.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>dbt community has clear consent that dbt should be written in lowercase. Please obey this agreement!</p>
 </div>
 <section id="how-does-dbt-work">
-<h3>How does dbt work?<a class="headerlink" href="#how-does-dbt-work" title="Permalink to this heading">#</a></h3>
+<h3>How does dbt work?<a class="headerlink" href="#how-does-dbt-work" title="Permalink to this headline">#</a></h3>
 <p>dbt parses every file in folder transform. In SQL files, it looks for the jinja function source/ref to create dependencies. It then creates DAG how all tables are connected and starts by compiling these into pure SQL files. Compiled files can be found in the target/compiled folder or whatever is set in the <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> file. Then it runs each model/table from the beginning to the end of the DAG.</p>
 </section>
 </section>
 <section id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h2>
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
 <p>Time to run our first dbt command</p>
 <ol class="arabic">
 <li><p>First, attach terminal to docker container with dbt</p>

@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Exercise &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Creating data marts" href="../04/intro.html" />
     <link rel="prev" title="Documentation &amp; tests - _stg_[sourcename].yml" href="documentation_tests.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/exercise.html">Exercise</a></li>
 </ul>
 </li>
@@ -423,7 +422,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="exercise">
-<h1>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h1>
+<h1>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h1>
 <ol class="arabic simple">
 <li><p><strong>Create base models:</strong> create base models for each source table (total 4 base models). Make sure all <code class="docutils literal notranslate"><span class="pre">id</span></code> columns are renamed according to the entity they represent e.g. for customer table set <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">as</span> <span class="pre">customer_id</span></code>. <em>(tip: sample SQL for <code class="docutils literal notranslate"><span class="pre">base_jaffle_shop_customers</span></code> is already included as <a class="reference internal" href="base_models.html"><span class="doc std std-doc">the example</span></a> in the lecture)</em></p></li>
 <li><p><strong>Create staging models:</strong></p>
@@ -438,13 +437,13 @@ document.write(`
 <p><img alt="title" src="../../_images/dbt_run_staging.gif" /></p>
 <p><img alt="title" src="../../_images/dbt_test.gif" /></p>
 <section id="solution">
-<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h2>
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h2>
 <p><strong>1. Base models</strong></p>
 <div class="dropdown admonition">
 <p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">base_jaffle_shop_customers.sql</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">source</span> <span class="k">as</span> <span class="p">(</span>
 
-  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span> <span class="s1">&#39;customers&#39;</span><span class="p">)</span> <span class="p">}}</span>
+  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;jaffle_shop&#39;</span><span class="p">,</span> <span class="s1">&#39;customers&#39;</span><span class="p">)</span> <span class="p">}}</span>
 
 <span class="p">),</span> <span class="n">renamed</span> <span class="k">as</span> <span class="p">(</span>
 
@@ -464,7 +463,7 @@ document.write(`
 <p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">base_jaffle_shop_orders.sql</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">source</span> <span class="k">as</span> <span class="p">(</span>
 
-  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span> <span class="s1">&#39;orders&#39;</span><span class="p">)</span> <span class="p">}}</span>
+  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;jaffle_shop&#39;</span><span class="p">,</span> <span class="s1">&#39;orders&#39;</span><span class="p">)</span> <span class="p">}}</span>
 
 <span class="p">),</span> <span class="n">renamed</span> <span class="k">as</span> <span class="p">(</span>
 
@@ -485,7 +484,7 @@ document.write(`
 <p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">base_jaffle_shop_payments.sql</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">source</span> <span class="k">as</span> <span class="p">(</span>
 
-  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span> <span class="s1">&#39;payments&#39;</span><span class="p">)</span> <span class="p">}}</span>
+  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;jaffle_shop&#39;</span><span class="p">,</span> <span class="s1">&#39;payments&#39;</span><span class="p">)</span> <span class="p">}}</span>
 
 <span class="p">),</span> <span class="n">renamed</span> <span class="k">as</span> <span class="p">(</span>
 
@@ -506,20 +505,11 @@ document.write(`
 <p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">base_google_analytics_traffic.sql</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">source</span> <span class="k">as</span> <span class="p">(</span>
 
-  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;dbt_seeds&#39;</span><span class="p">,</span> <span class="s1">&#39;ga_traffic&#39;</span><span class="p">)</span> <span class="p">}}</span>
-
-<span class="p">),</span> <span class="n">renamed</span> <span class="k">as</span> <span class="p">(</span>
-
-  <span class="n">select</span>
-    <span class="n">date</span><span class="p">,</span>
-    <span class="n">sessions</span><span class="p">,</span>
-    <span class="n">users</span> <span class="k">as</span> <span class="n">visitors</span><span class="p">,</span>
-    <span class="n">pageviews</span> <span class="k">as</span> <span class="n">page_views</span>
-  <span class="kn">from</span> <span class="nn">source</span>
+  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;google_analytics&#39;</span><span class="p">,</span> <span class="s1">&#39;ga_traffic&#39;</span><span class="p">)</span> <span class="p">}}</span>
 
 <span class="p">)</span>
 
-<span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="nn">renamed</span>
+<span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="nn">source</span>
 
 </pre></div>
 </div>
@@ -673,7 +663,7 @@ document.write(`
 
 <span class="nt">models</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_google_analytics_traffic</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Date field</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Basic information about google analytics traffic.</span>
 <span class="w">    </span><span class="nt">columns</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">date</span>
 <span class="w">        </span><span class="nt">tests</span><span class="p">:</span>

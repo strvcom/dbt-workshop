@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Documentation &amp; tests - _stg_[sourcename].yml &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Exercise" href="exercise.html" />
     <link rel="prev" title="Staging models - stg_[sourcename]_[tablename].sql" href="staging_models.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/exercise.html">Exercise</a></li>
 </ul>
 </li>
@@ -425,8 +424,8 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="documentation-tests-stg-sourcename-yml">
-<h1>Documentation &amp; tests - <code class="docutils literal notranslate"><span class="pre">_stg_[sourcename].yml</span></code><a class="headerlink" href="#documentation-tests-stg-sourcename-yml" title="Permalink to this heading">#</a></h1>
-<p>In the beginning of this course, we have created <code class="docutils literal notranslate"><span class="pre">stg_[sourcename].yml</span></code> file for each data source we have. These files provide a way to define the properties of dbt models (such as description and used tests) in a structured, human-readable format.</p>
+<h1>Documentation &amp; tests - <code class="docutils literal notranslate"><span class="pre">_stg_[sourcename].yml</span></code><a class="headerlink" href="#documentation-tests-stg-sourcename-yml" title="Permalink to this headline">#</a></h1>
+<p>To properly documentate and test our newly created models, we will create <code class="docutils literal notranslate"><span class="pre">_stg_[sourcename].yml</span></code> file for each data source we have (e.g. 1 file for jaffle_shop source data and 1 file for google_analytics data). These files are stored in <strong>models/staging/[sourcename]</strong> folder and provide a way to define the properties of dbt models (such as description and used tests) in a structured, human-readable format.</p>
 <p>For example, a typical YAML configuration file for a model might look something like this:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 
@@ -446,15 +445,15 @@ document.write(`
 </pre></div>
 </div>
 <section id="defining-description">
-<h2>Defining description<a class="headerlink" href="#defining-description" title="Permalink to this heading">#</a></h2>
+<h2>Defining description<a class="headerlink" href="#defining-description" title="Permalink to this headline">#</a></h2>
 <p>We can define description for each model and column. It can be either simple one line description or if you have a long description, you can use <code class="docutils literal notranslate"><span class="pre">docs</span> <span class="pre">block</span></code> and create additional markdown file in the same folder:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">[model].yml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_stg_[sourcename].yml</span></code></p></li>
 </ul>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 
 <span class="nt">models</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fact_orders</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">orders</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This table has basic information about orders, as well as some derived facts based on payments</span>
 
 <span class="w">    </span><span class="nt">columns</span><span class="p">:</span>
@@ -482,7 +481,7 @@ document.write(`
 </div>
 </section>
 <section id="defining-tests">
-<h2>Defining tests<a class="headerlink" href="#defining-tests" title="Permalink to this heading">#</a></h2>
+<h2>Defining tests<a class="headerlink" href="#defining-tests" title="Permalink to this headline">#</a></h2>
 <p>Additionally, in <code class="docutils literal notranslate"><span class="pre">_stg_[sourcename].yml</span></code> we can add tests that for example ensure a column contains no duplicates (<strong>unique</strong>) or zero null values (<strong>not_null</strong>). Once these tests are defined, you can validate their correctness by running <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">test</span></code> in command line.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 
@@ -499,7 +498,7 @@ document.write(`
 <p><img alt="title" src="../../_images/dbt_test.gif" /></p>
 </section>
 <section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
 <p>📝 <strong>example for <code class="docutils literal notranslate"><span class="pre">_stg_jaffle_shop.sql</span></code></strong></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 

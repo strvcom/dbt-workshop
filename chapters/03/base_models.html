@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Base models - base_[sourcename]_[tablename].sql &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Staging models - stg_[sourcename]_[tablename].sql" href="staging_models.html" />
     <link rel="prev" title="Creating staging models" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/exercise.html">Exercise</a></li>
 </ul>
 </li>
@@ -413,8 +412,8 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="base-models-base-sourcename-tablename-sql">
-<h1>Base models - <code class="docutils literal notranslate"><span class="pre">base_[sourcename]_[tablename].sql</span></code><a class="headerlink" href="#base-models-base-sourcename-tablename-sql" title="Permalink to this heading">#</a></h1>
-<p>Base models are stored in <strong>staging/[sourcename]/base</strong> folder. No transformation (joins) are performed in this stage, only renaming or recasting of columns. Simply put: one source table = one base model.</p>
+<h1>Base models - <code class="docutils literal notranslate"><span class="pre">base_[sourcename]_[tablename].sql</span></code><a class="headerlink" href="#base-models-base-sourcename-tablename-sql" title="Permalink to this headline">#</a></h1>
+<p>Firstly, we start with creation of base models, which are stored in <strong>models/staging/[sourcename]/base</strong> folder. No transformation (joins) are performed in this stage, only renaming or recasting of columns. Simply put: one source table = one base model.</p>
 <div class="admonition-use-source-jinja-function admonition">
 <p class="admonition-title">Use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">source()</span> <span class="pre">}}</span></code> jinja function</p>
 <p>💡 Select from source tables in your models using the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">source()</span> <span class="pre">}}</span></code> function, which is helping define the lineage of your data.</p>
@@ -432,7 +431,7 @@ document.write(`
 
 <span class="n">source</span> <span class="k">as</span> <span class="p">(</span>
 
-   <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span><span class="s1">&#39;customers&#39;</span><span class="p">)</span> <span class="p">}}</span>
+   <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">&#39;jaffle_shop&#39;</span><span class="p">,</span><span class="s1">&#39;customers&#39;</span><span class="p">)</span> <span class="p">}}</span>
 
 <span class="p">),</span>
 

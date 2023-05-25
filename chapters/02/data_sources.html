@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Data sources - _src_[sourcename].yml &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Exercise" href="exercise.html" />
     <link rel="prev" title="Project setup - dbt_project.yml" href="project_setup.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/exercise.html">Exercise</a></li>
 </ul>
 </li>
@@ -410,7 +409,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-tests">Defining tests</a></li>
 </ul>
             </nav>
         </div>
@@ -423,28 +422,36 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="data-sources-src-sourcename-yml">
-<h1>Data sources - <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code><a class="headerlink" href="#data-sources-src-sourcename-yml" title="Permalink to this heading">#</a></h1>
-<p>Inside <strong>each</strong> source subfolder (<em>jaffle_shop</em> and <em>google_analytics</em>), create <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code> yaml file. Edit <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code> and add table reference to the raw data. Sources make it possible to name and describe the data loaded into your warehouse.</p>
+<h1>Data sources - <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code><a class="headerlink" href="#data-sources-src-sourcename-yml" title="Permalink to this headline">#</a></h1>
+<p>Inside <strong>each</strong> source subfolder (<em>jaffle_shop</em> and <em>google_analytics</em>) located in models/staging folder, we need to create <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code> yaml file containing table reference to the raw data. Sources make it possible to name and describe the data loaded into your warehouse. We will setup up these files in the following <strong>Exercise</strong> on the next page.</p>
+<p>📝 <strong>example of <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code></strong></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 
 <span class="nt">sources</span><span class="p">:</span>
 <span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
-<span class="w">   </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">raw</span><span class="w"> </span><span class="c1">## db name</span>
-<span class="w">   </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">raw_test</span><span class="w"> </span><span class="c1"># schema where it sits</span>
-<span class="w">   </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Describe source table</span><span class="p p-Indicator">]</span>
+<span class="w">   </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">raw</span><span class="w"> </span><span class="c1"># schema where it sits</span>
+<span class="w">   </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Optional</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># describe source table</span>
 <span class="w">   </span><span class="nt">tables</span><span class="p">:</span>
-<span class="w">     </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_test</span><span class="w"> </span><span class="c1"># name by which we reference it, can be the same as in db or different</span>
-<span class="w">       </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">profiles</span><span class="w"> </span><span class="c1"># optional if name in the db is not same as above</span>
-<span class="w">       </span>
+<span class="w">     </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_name</span>
 </pre></div>
 </div>
-<div class="admonition-data-loading-options admonition">
-<p class="admonition-title">Data loading options</p>
-<p>Data can be loaded into DB by either using some EL tool like Meltano, Fivetran etc. or by uploading <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files. By running dbt command <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">seed</span></code> you can easily load your .csv files into your database. Place all .csv files in seeds folder within you dbt folder. Destination schema can be modified in <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> by adding:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">seeds</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">+schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seeds</span>
+<section id="defining-tests">
+<h2>Defining tests<a class="headerlink" href="#defining-tests" title="Permalink to this headline">#</a></h2>
+<p>Additionally, in <code class="docutils literal notranslate"><span class="pre">_src_[sourcename].yml</span></code> we can add tests that for example ensure a column contains no duplicates (<code class="docutils literal notranslate"><span class="pre">unique</span></code>) or zero null values (<code class="docutils literal notranslate"><span class="pre">not_null</span></code>). Once these tests are defined, you can validate their correctness by running <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">test</span></code> in command line.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+
+<span class="nt">sources</span><span class="p">:</span>
+<span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="w">   </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">raw</span><span class="w"> </span><span class="c1"># schema where it sits</span>
+<span class="w">   </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Optional</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># describe source table</span>
+<span class="w">   </span><span class="nt">tables</span><span class="p">:</span>
+<span class="w">     </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_name</span>
+<span class="w">       </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
+<span class="w">            </span><span class="nt">tests</span><span class="p">:</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unique</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span>
 </pre></div>
-</div>
 </div>
 <p>📝 <strong>example for <code class="docutils literal notranslate"><span class="pre">_src_jaffle_shop.yml</span></code></strong></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
@@ -470,9 +477,14 @@ document.write(`
 <span class="w">             </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unique</span>
 </pre></div>
 </div>
-<section id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h2>
-<p>Run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">test</span> <span class="pre">--select</span> <span class="pre">source:jaffle_shop</span></code></p>
+<div class="admonition-data-loading-options admonition">
+<p class="admonition-title">Data loading options</p>
+<p>Data can be loaded into DB by either using some EL tool like Meltano, Fivetran etc. or by uploading <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files. By running dbt command <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">seed</span></code> you can easily load your .csv files into your database. Place all .csv files in seeds folder within you dbt folder. Destination schema can be modified in <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> by adding:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">seeds</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">+schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seeds</span>
+</pre></div>
+</div>
+</div>
 </section>
 </section>
 
@@ -543,7 +555,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-tests">Defining tests</a></li>
 </ul>
   </nav></div>
 

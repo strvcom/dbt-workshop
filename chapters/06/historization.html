@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Creating historized table - [model_name]_snapshot.sql &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Exercise" href="exercise.html" />
     <link rel="prev" title="BONUS Tracking the history with dbt snapshot" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -424,16 +423,16 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="creating-historized-table-model-name-snapshot-sql">
-<h1>Creating historized table - <code class="docutils literal notranslate"><span class="pre">[model_name]_snapshot.sql</span></code><a class="headerlink" href="#creating-historized-table-model-name-snapshot-sql" title="Permalink to this heading">#</a></h1>
+<h1>Creating historized table - <code class="docutils literal notranslate"><span class="pre">[model_name]_snapshot.sql</span></code><a class="headerlink" href="#creating-historized-table-model-name-snapshot-sql" title="Permalink to this headline">#</a></h1>
 <p>In our example, we will use dbt snapshot functionality to create Slowly Changing Dimensions (SCD).</p>
 <div class="admonition-type-2-slowly-changing-dimensions admonition">
 <p class="admonition-title">type-2 Slowly Changing Dimensions</p>
 <p>A Slowly Changing Dimension is a dimension table that includes historical data, allowing you to track changes to dimension data over time. Type 2 SCDs <strong>add a new row to the dimension table whenever a change occurs</strong>. This new row contains the updated data while <strong>the old row is marked as inactive</strong>. This allows you to keep a historical record of changes to the dimension data over time.</p>
 </div>
 <section id="how-dbt-snapshot-works">
-<h2>How dbt snapshot works<a class="headerlink" href="#how-dbt-snapshot-works" title="Permalink to this heading">#</a></h2>
+<h2>How dbt snapshot works<a class="headerlink" href="#how-dbt-snapshot-works" title="Permalink to this headline">#</a></h2>
 <p>We have an orders table where the status field can be overwritten as the order is processed.</p>
-<table class="table">
+<table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>order_id</p></th>
 <th class="head"><p>status</p></th>
@@ -448,7 +447,7 @@ document.write(`
 </tbody>
 </table>
 <p>Now, the order goes from “placed” to “shipped”. That same record will now look like:</p>
-<table class="table">
+<table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>order_id</p></th>
 <th class="head"><p>status</p></th>
@@ -463,7 +462,7 @@ document.write(`
 </tbody>
 </table>
 <p>To prevent losing the primary information about <em>placed</em> state, we use dbt snapshots which will add a new row containing the most recent state together with two new columns <strong>dbt_valid_from</strong> and <strong>dbt_valid_to</strong>:</p>
-<table class="table">
+<table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>order_id</p></th>
 <th class="head"><p>status</p></th>
@@ -489,7 +488,7 @@ document.write(`
 </table>
 </section>
 <section id="creating-snapshots">
-<h2>Creating snapshots<a class="headerlink" href="#creating-snapshots" title="Permalink to this heading">#</a></h2>
+<h2>Creating snapshots<a class="headerlink" href="#creating-snapshots" title="Permalink to this headline">#</a></h2>
 <ol class="arabic">
 <li><p>Create a <code class="docutils literal notranslate"><span class="pre">[model_name]_snapshot.sql</span></code> file inside <code class="docutils literal notranslate"><span class="pre">snapshots</span></code> folder.</p></li>
 <li><p>Use a snapshot block:</p>

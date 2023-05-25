@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Before workshop &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Scene" href="../01/scene.html" />
     <link rel="prev" title="Transform Your Data Game" href="../../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/exercise.html">Exercise</a></li>
 </ul>
 </li>
@@ -413,7 +412,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="before-workshop">
-<h1>Before workshop<a class="headerlink" href="#before-workshop" title="Permalink to this heading">#</a></h1>
+<h1>Before workshop<a class="headerlink" href="#before-workshop" title="Permalink to this headline">#</a></h1>
 <ol class="arabic simple">
 <li><p>Clone dbt demo project -&gt; <a class="github reference external" href="https://github.com/strvcom/dbt-workshop">strvcom/dbt-workshop</a> and navigate to <code class="docutils literal notranslate"><span class="pre">dbt-demo</span></code> folder, which contains following:</p>
 <ul class="simple">
@@ -430,20 +429,24 @@ document.write(`
 <li><p>Make sure to have <a class="reference external" href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> running on your machine.</p></li>
 <li><p>Once you are in <code class="docutils literal notranslate"><span class="pre">dbt-demo</span></code> folder, run <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">up</span></code> which will download all images needed and start three containers:</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">dbt-demo-database-1</span></code> - postgres server as our data warehouse</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dbt-demo-dbt-1</span></code> - container where to run dbt command</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dbt-demo-adminer-1</span></code> - container with adminer, simple SQL IDE available on <a class="reference external" href="http://localhost:8080">localhost:8080</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dbt-workshop-db</span></code> - postgres server as our data warehouse</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dbt</span></code> - container where to run dbt command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dbt-workshop-adminer</span></code> - container with adminer, simple SQL IDE available on <a class="reference external" href="http://localhost:8080">localhost:8080</a></p></li>
 </ol>
 </li>
-<li><p>Log into the adminer to confirm everything is running:</p>
+<li><p>Log into the <a class="reference external" href="http://localhost:8080">adminer</a> to confirm everything is running:</p>
 <ol class="arabic simple">
-<li><p>server: <code class="docutils literal notranslate"><span class="pre">database</span></code></p></li>
-<li><p>user/pass: <code class="docutils literal notranslate"><span class="pre">postgres/postgres</span></code></p></li>
-<li><p>databse: <code class="docutils literal notranslate"><span class="pre">datawarehouse</span></code></p></li>
+<li><p>System: <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span></code></p></li>
+<li><p>Server: <code class="docutils literal notranslate"><span class="pre">database</span></code></p></li>
+<li><p>Username: <code class="docutils literal notranslate"><span class="pre">postgres</span></code></p></li>
+<li><p>Password: <code class="docutils literal notranslate"><span class="pre">postgres</span></code></p></li>
+<li><p>Database: <code class="docutils literal notranslate"><span class="pre">datawarehouse</span></code></p></li>
 </ol>
 </li>
-<li><p>You should see following screen:
+<li><p>You should see the following screen:
 <img alt="adminer" src="../../_images/adminer_success.png" /></p></li>
+<li><p>Change <code class="docutils literal notranslate"><span class="pre">Schema</span></code> in the upper left corner to <code class="docutils literal notranslate"><span class="pre">raw</span></code> to see already loaded jaffle_shop data
+<img alt="adminer_tables" src="../../_images/adminer_tables.png" /></p></li>
 </ol>
 </section>
 

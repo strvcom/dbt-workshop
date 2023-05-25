@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Exercise &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -66,9 +65,9 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Creating dbt Python model" href="../05/intro.html" />
-    <link rel="prev" title="Building marts - dim_[name].sql / fact_[name].sql" href="marts.html" />
+    <link rel="prev" title="Building marts - [tablename].sql" href="marts.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Creating data marts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Exercise</a></li>
 </ul>
 </li>
@@ -423,19 +422,20 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="exercise">
-<h1>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h1>
-<p>In this exercise we will create simple dimensional model consisting of one dimension table (<code class="docutils literal notranslate"><span class="pre">dim_customers</span></code>) and two fact tables (<code class="docutils literal notranslate"><span class="pre">fact_orders</span></code> and <code class="docutils literal notranslate"><span class="pre">fact_traffic</span></code>) - which you can already find as <span class="xref myst">the example</span>.</p>
+<h1>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h1>
+<p>In this exercise we will create simple model consisting of 3 tables: <em>customers</em>, <em>orders</em> and <em>traffic</em> (you can already find traffic table as <span class="xref myst">the example</span>.</p>
 <ol class="arabic simple">
-<li><p><strong>create <code class="docutils literal notranslate"><span class="pre">dim_customer</span></code></strong>: create dimension table for customers consisting of 3 staging models: <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_customers</span></code>, <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders</span></code> and <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders_value</span></code>. Create SQL query which will calculate date of <code class="docutils literal notranslate"><span class="pre">first_order</span></code> and <code class="docutils literal notranslate"><span class="pre">last_order</span></code> for the customer and their number of orders (<code class="docutils literal notranslate"><span class="pre">no_of_orders</span></code>) and total amount paid (<code class="docutils literal notranslate"><span class="pre">total_amount</span></code>) for all orders. Follow <span class="xref myst">the recommended structure</span> while building SQL.</p></li>
-<li><p><strong>create <code class="docutils literal notranslate"><span class="pre">fact_orders</span></code></strong>: create fact table for orders consisting of 2 staging models: <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders</span></code> and <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders_value</span></code>. Include <code class="docutils literal notranslate"><span class="pre">order_id</span></code>, <code class="docutils literal notranslate"><span class="pre">order_date</span></code>, <code class="docutils literal notranslate"><span class="pre">customer_id</span></code>, <code class="docutils literal notranslate"><span class="pre">status</span></code>, <code class="docutils literal notranslate"><span class="pre">total_amount</span></code> and <code class="docutils literal notranslate"><span class="pre">coupon_amount</span></code> columns. All these information were already calculated in staging layer, so there is no need for further calculations.</p></li>
-<li><p><strong>create <code class="docutils literal notranslate"><span class="pre">fact_traffic</span></code></strong>: copy-paste SQL from <span class="xref myst">the provided example</span> into <code class="docutils literal notranslate"><span class="pre">fact_traffic.sql</span></code></p></li>
+<li><p><strong>setup</strong>: create <em>core</em> folder within models/marts and <code class="docutils literal notranslate"><span class="pre">_core.yml</span></code> file.</p></li>
+<li><p><strong>create table <code class="docutils literal notranslate"><span class="pre">customers</span></code></strong>: create a table for customers consisting of 3 staging models: <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_customers</span></code>, <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders</span></code> and <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders_value</span></code>. Create SQL query which will calculate date of <code class="docutils literal notranslate"><span class="pre">first_order</span></code> and <code class="docutils literal notranslate"><span class="pre">last_order</span></code> for the customer and their number of orders (<code class="docutils literal notranslate"><span class="pre">no_of_orders</span></code>) and total amount paid (<code class="docutils literal notranslate"><span class="pre">total_amount</span></code>) for all orders. Follow <span class="xref myst">the recommended structure</span> while building SQL.</p></li>
+<li><p><strong>create table <code class="docutils literal notranslate"><span class="pre">orders</span></code></strong>: create a table for orders consisting of 2 staging models: <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders</span></code> and <code class="docutils literal notranslate"><span class="pre">stg_jaffle_shop_orders_value</span></code>. Include <code class="docutils literal notranslate"><span class="pre">order_id</span></code>, <code class="docutils literal notranslate"><span class="pre">order_date</span></code>, <code class="docutils literal notranslate"><span class="pre">customer_id</span></code>, <code class="docutils literal notranslate"><span class="pre">status</span></code>, <code class="docutils literal notranslate"><span class="pre">total_amount</span></code> and <code class="docutils literal notranslate"><span class="pre">coupon_amount</span></code> columns. All these information were already calculated in staging layer, so there is no need for further calculations.</p></li>
+<li><p><strong>create table <code class="docutils literal notranslate"><span class="pre">traffic</span></code></strong>: copy-paste SQL from <span class="xref myst">the provided example</span> into <code class="docutils literal notranslate"><span class="pre">traffic.sql</span></code></p></li>
 <li><p>run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> command to create tables</p></li>
 </ol>
 <p><img alt="title" src="../../_images/dbt_run.gif" /></p>
 <section id="solution">
-<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h2>
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h2>
 <div class="dropdown admonition">
-<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">dim_customers.sql</span></code></p>
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">customers.sql</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">customers</span> <span class="k">as</span> <span class="p">(</span>
 
  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_jaffle_shop_customers&#39;</span><span class="p">)</span> <span class="p">}}</span>
@@ -490,7 +490,7 @@ document.write(`
 </div>
 </div>
 <div class="dropdown admonition">
-<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">fact_orders.sql</span></code></p>
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">orders.sql</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">orders</span> <span class="k">as</span> <span class="p">(</span>
 
   <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_jaffle_shop_orders&#39;</span><span class="p">)</span> <span class="p">}}</span>
@@ -519,7 +519,7 @@ document.write(`
 </div>
 </div>
 <div class="dropdown admonition">
-<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">fact_traffic.sql</span></code></p>
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">traffic.sql</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">traffic</span> <span class="k">as</span> <span class="p">(</span>
 
   <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_google_analytics_traffic&#39;</span><span class="p">)</span> <span class="p">}}</span>
@@ -594,7 +594,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></p>
+        <p class="prev-next-title">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></p>
       </div>
     </a>
     <a class="right-next"

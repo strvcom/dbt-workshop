@@ -1,13 +1,13 @@
 # dbt Python model
 
-To incorporate Python in our workflow, we will use Fal. For more information on Fal, please refer to the [Fal documentation](https://fal-ai.github.io/fal/).
+To incorporate Python in our workflow, we will use Fal. For more information on Fal, please refer to the [Fal documentation](https://fal.ai/).
 The latest version of dbt support python models on its own, however these are models running directly inside vendors: e.g. Snowpark or Databricks. Due to limits of this workshops, we are running python model locally and for this purpose Fal AI is perfect choice.
 
 ## Setup all things needed
 
 1. **fal python models:** 
-   1. Create a new folder called `ml` in the `models/marts` folder. This is where we will store our ML models.
-   2. Inside the `ml` folder, create a new file called `_ml.yml` with model and source defintion.
+   1. Create a new folder called `ml` in the models/marts folder. This is where we will store our ML models.
+   2. Inside the `ml` folder, create a new file called `_ml.yml` with model and source definition.
       :::{admonition} `_ml.yml`
       :class: dropdown
 
@@ -37,7 +37,7 @@ The latest version of dbt support python models on its own, however these are mo
       ```
       :::
 1. **fal python scripts:** 
-   1. Add prediction script called `customer_registration_prediction.py` into `scripts` subfolders in the dbt project folder with script.
+   1. Navigate to `scripts` folder in *dbt_demo* folder and add prediction script called `customer_registration_prediction.py` in it.
       :::{admonition} `customer_registration_prediction.py`
       :class: dropdown
 
@@ -45,7 +45,7 @@ The latest version of dbt support python models on its own, however these are mo
       import pandas as pd
       from sklearn.linear_model import LogisticRegression
 
-      ref_df = ref('dim_customers')
+      ref_df = ref('customers')
 
       # fill missing values with 0
       ref_df.fillna(0, inplace=True)
@@ -76,7 +76,7 @@ The latest version of dbt support python models on its own, however these are mo
 
       ```yaml
       vars:
-        fal-models-paths: "models/ml"
+        fal-models-paths: "models/marts/ml"
         fal-scripts-path: "scripts"
       ```
       :::
@@ -85,4 +85,4 @@ The latest version of dbt support python models on its own, however these are mo
    2. Take a look at the created table `dbt_ml.customer_registration_prediction`
    3. Then run the python script itself `fal run`
    4. Now you can take a look at the table again.
-2. [BONUS] Add staging ml folder and incorporate all the way up into dim so you manager can see it in his dashboard!
+2. [BONUS] Add staging ml folder and incorporate all the way up into `customers` table so you manager can see it in his dashboard!

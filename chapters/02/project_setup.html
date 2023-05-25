@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Project setup - dbt_project.yml &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Data sources - _src_[sourcename].yml" href="data_sources.html" />
     <link rel="prev" title="Project setup" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Creating data marts</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/exercise.html">Exercise</a></li>
 </ul>
 </li>
@@ -423,11 +422,11 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="project-setup-dbt-project-yml">
-<h1>Project setup - <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code><a class="headerlink" href="#project-setup-dbt-project-yml" title="Permalink to this heading">#</a></h1>
+<h1>Project setup - <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code><a class="headerlink" href="#project-setup-dbt-project-yml" title="Permalink to this headline">#</a></h1>
+<p>Firstly, we need to setup our dbt project by adjusting <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> file and creating subfolders in <code class="docutils literal notranslate"><span class="pre">models</span></code> folder which will contain our models.</p>
 <ol class="arabic simple">
-<li><p>Go to <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> and set project name, e.g. <em>dbt_workshop</em></p></li>
-<li><p>Scroll down and under <em>models</em>, change first submodel to the new project name - <em>dbt_workshop</em></p></li>
-<li><p>According to our recommended structure, add submodels <em>staging</em> and <em>marts</em> with materialization and schema settings:</p></li>
+<li><p>Go to <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> located in <code class="docutils literal notranslate"><span class="pre">dbt_demo</span></code> folder.</p></li>
+<li><p>According to our recommended structure, we have defined submodels <em>staging</em>, <em>marts</em> and <em>ml</em> with materialization and schema settings which will be used throughout the workshop:</p></li>
 </ol>
 <p>📝 <strong>example for <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code></strong></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">models</span><span class="p">:</span>
@@ -438,15 +437,26 @@ document.write(`
 <span class="w">      </span><span class="nt">+schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">marts</span>
 <span class="w">      </span><span class="nt">core</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">materialized</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table</span>
+<span class="w">      </span><span class="nt">ml</span><span class="p">:</span><span class="w"> </span>
+<span class="w">        </span><span class="nt">materialized</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
-<li><p>Inside models folder create subfolders <code class="docutils literal notranslate"><span class="pre">staging</span></code> and <code class="docutils literal notranslate"><span class="pre">marts</span></code>. In the previous step we set up configuration for all models which will be placed in these folders.</p></li>
-<li><p>Inside <code class="docutils literal notranslate"><span class="pre">staging</span></code> folder, create subfolder for each data source, in our case <em>jaffle_shop</em> and <em>google_analytics</em></p></li>
+<li><p>Go to <code class="docutils literal notranslate"><span class="pre">models</span></code> folder and <strong>create subfolders</strong> <code class="docutils literal notranslate"><span class="pre">staging</span></code> and <code class="docutils literal notranslate"><span class="pre">marts</span></code>. In the previous step we set up configuration for all models which will be placed in these folders.</p></li>
+<li><p>Inside <code class="docutils literal notranslate"><span class="pre">staging</span></code> folder, create subfolder for each data source, in our case <em>jaffle_shop</em> and <em>google_analytics</em>.</p></li>
 </ol>
 <section id="exercise-pro-tip">
-<h2>Exercise - Pro Tip<a class="headerlink" href="#exercise-pro-tip" title="Permalink to this heading">#</a></h2>
+<h2>Exercise - Pro Tip<a class="headerlink" href="#exercise-pro-tip" title="Permalink to this headline">#</a></h2>
 <p>Run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">ls</span> <span class="pre">--resource-type</span> <span class="pre">model</span> <span class="pre">--output</span> <span class="pre">path</span></code></p>
+<p>If everything is setup correctly, you should see this</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="m">09</span>:19:56<span class="w">  </span><span class="o">[</span>WARNING<span class="o">]</span>:<span class="w"> </span>Configuration<span class="w"> </span>paths<span class="w"> </span>exist<span class="w"> </span><span class="k">in</span><span class="w"> </span>your<span class="w"> </span>dbt_project.yml<span class="w"> </span>file<span class="w"> </span>which<span class="w"> </span><span class="k">do</span><span class="w"> </span>not<span class="w"> </span>apply<span class="w"> </span>to<span class="w"> </span>any<span class="w"> </span>resources.
+There<span class="w"> </span>are<span class="w"> </span><span class="m">4</span><span class="w"> </span>unused<span class="w"> </span>configuration<span class="w"> </span>paths:
+-<span class="w"> </span>models.dbt_demo.marts.core
+-<span class="w"> </span>models.dbt_demo.marts.ml
+-<span class="w"> </span>models.dbt_demo.marts
+-<span class="w"> </span>models.dbt_demo.staging
+</pre></div>
+</div>
 </section>
 </section>
 

@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Creating data marts &#8212; dbt Workshop</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -65,10 +64,10 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="canonical" href="https://strvcom.github.io/dbt-workshop/intro.html/chapters/04/intro.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Building marts - dim_[name].sql / fact_[name].sql" href="marts.html" />
+    <link rel="next" title="Building marts - [tablename].sql" href="marts.html" />
     <link rel="prev" title="Exercise" href="../03/exercise.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Creating data marts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="marts.html">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="exercise.html">Exercise</a></li>
 </ul>
 </li>
@@ -413,13 +412,13 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="creating-data-marts">
-<h1>Creating data marts<a class="headerlink" href="#creating-data-marts" title="Permalink to this heading">#</a></h1>
+<h1>Creating data marts<a class="headerlink" href="#creating-data-marts" title="Permalink to this headline">#</a></h1>
 <p>Next section is dedicated to <code class="docutils literal notranslate"><span class="pre">marts</span></code> folder which we have created at the beginning in <code class="docutils literal notranslate"><span class="pre">models</span></code> folder.</p>
-<p>We are fans of dimensional data modelling, thus the data model will be as following:</p>
+<p>The data model will be as following:</p>
 <p><img alt="data_model" src="../../_images/data_model.png" /></p>
 <div class="admonition-goal-of-this-section admonition">
 <p class="admonition-title">Goal of this section:</p>
-<p>Create final data model in form of star schema: dimensions and facts.</p>
+<p>Create final data model.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -470,7 +469,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></p>
+        <p class="prev-next-title">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

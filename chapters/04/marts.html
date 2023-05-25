@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Building marts - dim_[name].sql / fact_[name].sql &#8212; dbt Workshop</title>
+    <title>Building marts - [tablename].sql &#8212; dbt Workshop</title>
   
   
   
@@ -44,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Exercise" href="exercise.html" />
     <link rel="prev" title="Creating data marts" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -193,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Modelling</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Creating data marts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="exercise.html">Exercise</a></li>
 </ul>
 </li>
@@ -400,7 +399,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Building marts - dim_[name].sql / fact_[name].sql</h1>
+    <h1>Building marts - [tablename].sql</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -423,21 +422,17 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="building-marts-dim-name-sql-fact-name-sql">
-<h1>Building marts - <code class="docutils literal notranslate"><span class="pre">dim_[name].sql</span> <span class="pre">/</span> <span class="pre">fact_[name].sql</span></code><a class="headerlink" href="#building-marts-dim-name-sql-fact-name-sql" title="Permalink to this heading">#</a></h1>
-<p>We can now start creating data marts. In this lecture, we will follow dimensional modeling practice, but other techniques can be also used.</p>
-<div class="admonition-kimball-s-dimensional-modelling admonition">
-<p class="admonition-title">Kimball’s dimensional modelling</p>
-<p>The key concept of dimensional modeling is the creation of a star schema, which consists of a central <strong>fact table</strong> surrounded by one or more <strong>dimension tables</strong>. <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">fact</span> <span class="pre">table</span> <span class="pre">contains</span> <span class="pre">the</span> <span class="pre">measures</span> <span class="pre">or</span> <span class="pre">quantitative</span> <span class="pre">data</span></code> that is to be analyzed, such as sales revenue or customer orders, while <code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">dimension</span> <span class="pre">tables</span> <span class="pre">contain</span> <span class="pre">descriptive</span> <span class="pre">attributes</span></code> or qualitative data, such as product or customer information. The relationship between the fact and dimension tables is established through a set of keys, called foreign keys, that allow the data to be joined together.</p>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="building-marts-tablename-sql">
+<h1>Building marts - <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code><a class="headerlink" href="#building-marts-tablename-sql" title="Permalink to this headline">#</a></h1>
+<p>This is the layer where everything comes together and we start to arrange all of our staging models into marts that have identity and purpose.</p>
 <section id="creating-core-folder">
-<h2>Creating <code class="docutils literal notranslate"><span class="pre">core</span></code> folder<a class="headerlink" href="#creating-core-folder" title="Permalink to this heading">#</a></h2>
-<p>In our example, we will be creating <code class="docutils literal notranslate"><span class="pre">core</span></code> folder within <code class="docutils literal notranslate"><span class="pre">marts</span></code> folder.</p>
+<h2>Creating <code class="docutils literal notranslate"><span class="pre">core</span></code> folder<a class="headerlink" href="#creating-core-folder" title="Permalink to this headline">#</a></h2>
+<p>According to the best practice, it is recommended to create a subfolder for each area of concern within <strong>marts</strong> folder. In our example, we will be creating <code class="docutils literal notranslate"><span class="pre">core</span></code> folder within <code class="docutils literal notranslate"><span class="pre">marts</span></code> folder.</p>
 <p><strong>Setup:</strong></p>
 <ol class="arabic">
 <li><p>go to <code class="docutils literal notranslate"><span class="pre">models/marts</span></code> folder and create <code class="docutils literal notranslate"><span class="pre">core</span></code> folder</p></li>
 <li><p>create <code class="docutils literal notranslate"><span class="pre">_core.yml</span></code> where we store documentation and tests for the tables</p></li>
-<li><p>create <code class="docutils literal notranslate"><span class="pre">dim_[].sql</span></code> and <code class="docutils literal notranslate"><span class="pre">fact_[].sql</span></code> files with SQL transformations following this recommended structure:</p>
+<li><p>create a <code class="docutils literal notranslate"><span class="pre">[tablename].sql</span></code> file with SQL transformations following this recommended structure:</p>
 <ul>
 <li><p>create <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">CTE</span> <span class="pre">table</span> <span class="pre">for</span> <span class="pre">each</span> <span class="pre">staging</span> <span class="pre">model</span></code> from which you are selecting</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="k">with</span> <span class="n">traffic</span> <span class="k">as</span> <span class="p">(</span>
@@ -482,7 +477,7 @@ document.write(`
 </ul>
 </li>
 </ol>
-<p>📝 <strong>example for <code class="docutils literal notranslate"><span class="pre">fact_traffic.sql</span></code></strong></p>
+<p>📝 <strong>example for <code class="docutils literal notranslate"><span class="pre">traffic.sql</span></code></strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">traffic</span> <span class="k">as</span> <span class="p">(</span>
 
  <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;stg_google_analytics_traffic&#39;</span><span class="p">)</span> <span class="p">}}</span>
@@ -519,7 +514,7 @@ document.write(`
 <p>Once it is all set, don’t forget to run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> command in terminal to create all tables in database.</p>
 <div class="tip admonition">
 <p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span> <span class="pre">--select</span> <span class="pre">[model_folder/model_name]</span></code></p>
-<p>You can add flag <code class="docutils literal notranslate"><span class="pre">--select</span></code> to <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> command and specify model name or model folder to execute only subset of models.
+<p>You can add argument <code class="docutils literal notranslate"><span class="pre">--select</span></code> to <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> command and specify model name or model folder to execute only subset of models.
 <img alt="title" src="../../_images/dbt_marts.gif" /></p>
 </div>
 <div class="tip admonition">
@@ -538,7 +533,7 @@ document.write(`
 </div>
 </section>
 <section id="optional-creating-intermediate-folder">
-<h2>[Optional] Creating <code class="docutils literal notranslate"><span class="pre">intermediate</span></code> folder<a class="headerlink" href="#optional-creating-intermediate-folder" title="Permalink to this heading">#</a></h2>
+<h2>[Optional] Creating <code class="docutils literal notranslate"><span class="pre">intermediate</span></code> folder<a class="headerlink" href="#optional-creating-intermediate-folder" title="Permalink to this headline">#</a></h2>
 <p>Within our <code class="docutils literal notranslate"><span class="pre">core</span></code> folder (or optionally within each folder covering different area), we can create intermediate models <code class="docutils literal notranslate"><span class="pre">[entity]s_[verb]s.sql</span></code>. Intermediate models are used to break down complex data transformations into smaller, more manageable steps. These intermediate models act as building blocks, enabling you to create a modular (meaning that they can be reused in multiple data pipelines), and scalable data transformation process that is easier to understand, test, and maintain.</p>
 </section>
 </section>
