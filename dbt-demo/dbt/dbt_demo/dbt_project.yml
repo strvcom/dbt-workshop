@@ -6,7 +6,9 @@ name: 'dbt_demo'
 version: '1.0.0'
 config-version: 2
 
-# This setting configures which "profile" dbt uses for this project.
+# This setting configures which "profile" dbt uses for this project. Profiles are 
+# defined in profiles/profiles.yml file that contains the connection details for 
+# your data platform
 profile: dbt-demo
 
 # These configurations specify where dbt should look for different types of files.
@@ -39,10 +41,7 @@ models:
       +schema: marts
       core:
         materialized: table
-    ml: 
-      materialized: table
-
-vars:
-  fal-models-paths: [models/ml]
-
+      ml: 
+        materialized: table
+      
 

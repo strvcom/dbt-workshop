@@ -1,5 +1,5 @@
 # Loyalty data
-In this example we will use Python and some simple ML to predict whether a customer will register for a loyalty program. In order to do so, we will use the `dim_customers` table we created in the previous exercise. Let's first add information which customer is registered already.
+In this example we will use Python and some simple ML to predict whether a customer will register for a loyalty program. In order to do so, we will use the `customers` table we created in the previous exercise. Let's first add information which customer is registered already.
 
 ## Exercise
 
@@ -8,9 +8,9 @@ In this example we will use Python and some simple ML to predict whether a custo
 2. **Add staging model:** Create staging dbt model (since it's very simple, base is not needed) and configs:
    1. Create subfolder `loyalty` for this new data source in `dbt-demo/models/staging/`
    2. Add data source defintion into `_src_loyalty.yml`
-   3. Add staging dbt model `stg_loyalty_customer.sql`
+   3. Add staging dbt model `stg_loyalty_customers.sql`
    4. Add model definition `_stg_loyalty.yml`
-3. **Update dim_customers:** Update `marts/core/dim_customers.sql` file to use this new source and show which customers are registered.
+3. **Update table `customers`:** Update `marts/core/customers.sql` file to use this new source and show which customers are registered.
 
 ## Solution
 **2.2**
@@ -22,22 +22,26 @@ In this example we will use Python and some simple ML to predict whether a custo
 version: 2
 
 sources:
-  - name: dbt_seeds
-    schema: dbt
-    tables:
-      - name: loyalty_customers
+ - name: loyalty
+   schema: dbt_seeds
+   tables:
+     - name: loyalty_customers
+       columns:
+         - name: customer_id
+           tests:
+             - unique
 ```
 :::
 
 **2.3**
 
-:::{admonition} `stg_loyalty_customer.sql`
+:::{admonition} `stg_loyalty_customers.sql`
 :class: dropdown
 
 ```sql
 with loyal_customers as (
 
-  select * from {{ source('dbt_seeds', 'loyalty_customers') }}
+  select * from {{ source('loyalty', 'loyalty_customers') }}
 
 )
 
@@ -54,13 +58,6 @@ select * from loyal_customers
 version: 2
 
 models:
-  - name: base_loyalty_customers
-    description: List of registered customers
-    columns:
-      - name: customer_id
-        tests:
-          - unique
-          - not_null
   - name: stg_loyalty_customers
     description: List of registered customers
     columns:
@@ -74,7 +71,7 @@ models:
 
 **3 Update dim customer**
 
-:::{admonition} Update `dim_customer.sql`
+:::{admonition} Update `customers.sql`
 :class: dropdown
 
 ```sql
