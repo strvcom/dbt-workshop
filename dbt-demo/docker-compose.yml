@@ -3,6 +3,8 @@ services:
   dbt:
     container_name: dbt
     build: .
+    ports:
+      - 8088:8088
     restart: always
     tty: true
     environment:
