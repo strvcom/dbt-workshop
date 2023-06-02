@@ -1,6 +1,7 @@
 # Transform Your Data Game
 
 ## Welcome to the dbt Workshop by STRV
+### https://tinyurl.com/ml-dbt
 
 ![STRV](images/strv.png)
 
