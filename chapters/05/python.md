@@ -82,7 +82,7 @@ The latest version of dbt support python models on its own, however these are mo
       :::
 1. **fal python models:** Ready to run it 
    1. First run the selected new dbt models `dbt run --select marts.ml.*`
-   2. Take a look at the created table `dbt_ml.customer_registration_prediction`
+   2. Take a look at the created table `dbt_marts.customer_registration_prediction`
    3. Then run the python script itself `fal run`
    4. Now you can take a look at the table again.
 2. [BONUS] Add staging ml folder and incorporate all the way up into `customers` table so you manager can see it in his dashboard!
